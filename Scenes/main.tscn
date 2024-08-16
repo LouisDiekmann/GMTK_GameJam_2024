@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://bm4bgpxv7fvot"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_032sg"]
+[ext_resource type="PackedScene" uid="uid://o75eaxe4f6nm" path="res://Scenes/ui.tscn" id="1_hbtbv"]
+[ext_resource type="Texture2D" uid="uid://1efe2qb444w0" path="res://Assets/TEMP/k2j86njz.bmp" id="1_kcbfq"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="2_cdgvj"]
+
+[sub_resource type="Environment" id="Environment_mer0o"]
+
+[node name="main" type="Node3D"]
+script = ExtResource("1_032sg")
+
+[node name="CanvasLayer" parent="." node_paths=PackedStringArray("mainNode") instance=ExtResource("1_hbtbv")]
+mainNode = NodePath("..")
+
+[node name="background" type="Sprite3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+texture = ExtResource("1_kcbfq")
+
+[node name="player" type="Node3D" parent="."]
+
+[node name="head" type="Node3D" parent="player"]
+script = ExtResource("2_cdgvj")
+AMPLITUDE = 0.1
+
+[node name="Camera3D" type="Camera3D" parent="player/head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.60446)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mer0o")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 3)
+omni_range = 12.936

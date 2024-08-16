@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://dp607or8adtk3"]
+
+[ext_resource type="Texture2D" uid="uid://dnqeo1bihx6wg" path="res://Assets/TEMP/Screenshot 2024-08-16 222813.png" id="1_f5myv"]
+[ext_resource type="Script" path="res://Scripts/customer.gd" id="1_ojrj1"]
+
+[sub_resource type="AudioStreamMP3" id="AudioStreamMP3_lyw1n"]
+
+[sub_resource type="Animation" id="Animation_awt8y"]
+resource_name = "wobble"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("characterSprite:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.0872665), Vector3(0, 0, 0), Vector3(0, 0, 0.0872665)]
+}
+
+[sub_resource type="Animation" id="Animation_nl73v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("characterSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_83ksp"]
+_data = {
+"RESET": SubResource("Animation_nl73v"),
+"wobble": SubResource("Animation_awt8y")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_mhopd"]
+
+[node name="customer" type="Node3D" node_paths=PackedStringArray("characterSprite")]
+script = ExtResource("1_ojrj1")
+characterSprite = NodePath("characterSprite")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamMP3_lyw1n")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25869, 1.07155, 0)
+text = "I need this to be 15% bigger"
+
+[node name="characterSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.383303, 0, 0)
+render_priority = 1
+texture = ExtResource("1_f5myv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="characterSprite"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_83ksp")
+}
+autoplay = "wobble"
+
+[node name="object" type="Node3D" parent="."]
+transform = Transform3D(0.936213, 0.351433, 0, -0.324682, 0.864948, -0.382683, -0.134488, 0.358273, 0.92388, 1.89209, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="object"]
+mesh = SubResource("BoxMesh_mhopd")

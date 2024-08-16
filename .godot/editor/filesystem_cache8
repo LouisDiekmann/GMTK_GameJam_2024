@@ -1,3 +1,22 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1723727394
-icon.svg::CompressedTexture2D::483931032591829119::1723727387::1723727395::1::::<><>::
+::res://::1723840571
+icon.svg::CompressedTexture2D::483931032591829119::1723799940::1723839134::1::::<><>::
+README.md::TextFile::-1::1723800413::0::1::::<><>::
+::res://Assets/::1723847776
+::res://Assets/TEMP/::1723840154
+k2j86njz.bmp::CompressedTexture2D::1833479616677220817::1723839200::1723840149::1::::<><>::
+Screenshot 2024-08-16 222813.png::CompressedTexture2D::8105016299050101462::1723840128::1723840154::1::::<><>::
+::res://Assets/textures/::1723847783
+::res://Assets/textures/characters/::1723847802
+character1.png::CompressedTexture2D::3745559664169559497::1723847755::1723847805::1::::<><>::
+character2.png::CompressedTexture2D::4326019450485185632::1723847754::1723847805::1::::<><>::
+character3.png::CompressedTexture2D::6079843476112401294::1723847754::1723847805::1::::<><>::
+::res://Scenes/::1723846038
+customer.tscn::PackedScene::8277666249337846580::1723846038::0::1::::<><>::uid://dnqeo1bihx6wg::::res://Assets/TEMP/Screenshot 2024-08-16 222813.png<>res://Scripts/customer.gd
+main.tscn::PackedScene::3288626018351300683::1723846038::0::1::::<><>::res://Scripts/main.gd<>uid://o75eaxe4f6nm::::res://Scenes/ui.tscn<>uid://1efe2qb444w0::::res://Assets/TEMP/k2j86njz.bmp<>res://Scripts/player.gd
+ui.tscn::PackedScene::1050532587772209530::1723846038::0::1::::<><>::res://Scripts/ui.gd
+::res://Scripts/::1723845311
+player.gd::GDScript::-1::1723840746::0::1::::<>Node3D<>::
+customer.gd::GDScript::-1::1723845311::0::1::::Customer<>Node3D<>::
+main.gd::GDScript::-1::1723844509::0::1::::<>Node3D<>::
+ui.gd::GDScript::-1::1723842689::0::1::::<>CanvasLayer<>::
