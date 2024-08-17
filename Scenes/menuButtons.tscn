@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d10hrryhtj13j"]
+[gd_scene load_steps=3 format=3 uid="uid://d10hrryhtj13j"]
 
 [ext_resource type="Script" path="res://Scripts/menuButtons.gd" id="1_h2g2n"]
+[ext_resource type="AudioStream" uid="uid://bn6bn5wy26t50" path="res://Assets/audio/effects/paper2.mp3" id="2_fbmba"]
 
 [node name="VBoxContainer" type="VBoxContainer"]
 anchors_preset = 8
@@ -26,7 +27,13 @@ text = "Credits"
 
 [node name="Exit" type="Button" parent="."]
 layout_mode = 2
-text = "Settings"
+text = "Exit"
+
+[node name="paper" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_fbmba")
+volume_db = 3.692
 
 [connection signal="button_down" from="Play" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="Settings" to="." method="_on_settings_button_down"]
 [connection signal="button_down" from="Credits" to="." method="_on_credits_button_down"]
+[connection signal="button_down" from="Exit" to="." method="_on_exit_button_down"]
