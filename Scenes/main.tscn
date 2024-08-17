@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://bm4bgpxv7fvot"]
+[gd_scene load_steps=17 format=3 uid="uid://bm4bgpxv7fvot"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_032sg"]
 [ext_resource type="PackedScene" uid="uid://o75eaxe4f6nm" path="res://Scenes/ui.tscn" id="1_hbtbv"]
-[ext_resource type="Texture2D" uid="uid://1efe2qb444w0" path="res://Assets/TEMP/k2j86njz.bmp" id="1_kcbfq"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="2_cdgvj"]
 [ext_resource type="Script" path="res://Scripts/menu.gd" id="2_p76ab"]
 [ext_resource type="Texture2D" uid="uid://bgyauupmj5uo7" path="res://Assets/textures/curtainLeft.png" id="3_qfwvv"]
@@ -10,6 +9,35 @@
 [ext_resource type="Texture2D" uid="uid://s074jktwig77" path="res://Assets/textures/curtain2.png" id="5_f8s0e"]
 [ext_resource type="AudioStream" uid="uid://dn43057162i48" path="res://Assets/audio/effects/curtain.mp3" id="6_wmtdr"]
 [ext_resource type="AudioStream" uid="uid://deptrquw54yhf" path="res://Assets/audio/effects/curtainClose.mp3" id="7_hbcox"]
+[ext_resource type="PackedScene" uid="uid://d10hrryhtj13j" path="res://Scenes/menuButtons.tscn" id="8_7d6uk"]
+[ext_resource type="Texture2D" uid="uid://dfm4en1e4h5wa" path="res://Assets/textures/background.png" id="10_5mpya"]
+
+[sub_resource type="Animation" id="Animation_lwufo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("curtainLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("curtainRight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_gjw1p"]
 resource_name = "closeCurtains"
@@ -67,33 +95,6 @@ tracks/1/keys = {
 "values": [Vector2(0, 0), Vector2(960, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_lwufo"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("curtainLeft:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("curtainRight:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_58ojm"]
 _data = {
 "RESET": SubResource("Animation_lwufo"),
@@ -147,12 +148,16 @@ stream = ExtResource("6_wmtdr")
 [node name="curtainClose" type="AudioStreamPlayer" parent="menu"]
 stream = ExtResource("7_hbcox")
 
+[node name="menuButtons" parent="menu" node_paths=PackedStringArray("menuNode", "mainNode") instance=ExtResource("8_7d6uk")]
+menuNode = NodePath("..")
+mainNode = NodePath("../..")
+
 [node name="CanvasLayer" parent="." node_paths=PackedStringArray("mainNode") instance=ExtResource("1_hbtbv")]
 mainNode = NodePath("..")
 
 [node name="background" type="Sprite3D" parent="."]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
-texture = ExtResource("1_kcbfq")
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("10_5mpya")
 
 [node name="player" type="Node3D" parent="."]
 

@@ -3,7 +3,7 @@ class_name Customer
 
 var objective : String
 var objectiveValue : int
-var autoRotate : bool
+@onready var autoRotate : bool = true
 @export var characterSprite: Sprite3D
 
 @onready var parent : Node3D = get_parent()
@@ -14,14 +14,17 @@ var autoRotate : bool
 
 @onready var objectSizeVectorLength : float = object.scale.length()
 @onready var animationPlayer: AnimationPlayer = $characterSprite/AnimationPlayer
-@onready var audioStreamPlayer: AudioStreamPlayer = $AudioStreamPlayer
-@onready var label3D: Label3D = $Label3D
+@onready var audioPlayerSwoop : AudioStreamPlayer = $playerSwoop
+@onready var audioClick: AudioStreamPlayer = $click
+
+@onready var flavorText: Label3D = $flavorText
+@onready var objectiveText: Label3D = $objectiveText
 
 @onready var textLines : Dictionary = {
 	"smaller" : {
 		0 : "This is way to big for what I want to use it for!",
 		1 : "This dang thing needs to fit inside of me pocket",
-		2 : "Where de hell am I supposed to store this giant piece of garabge?"
+		2 : "Where de hell am I supposed to store this giant piece of garbage?"
 	},
 	"bigger" : {
 		0 : "I need this thing to fit more Beer!",
@@ -44,15 +47,21 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("enlarge") and object.scale.x < 2:
+	if Input.is_action_just_pressed("enlarge") or Input.is_action_just_pressed("shrink"):
+		audioClick.pitch_scale = randf_range(.8,1.2)
+		audioClick.play()
+	if Input.is_action_just_released("enlarge") or Input.is_action_just_released("shrink"):
+		audioClick.stop()
+	
+	if Input.is_action_pressed("enlarge") and scaleableObject.scale.x < 2:
 		scaleableObject.scale += Vector3(.01,.01,.01)
-	if Input.is_action_pressed("shrink") and object.scale.x > .5:
+	if Input.is_action_pressed("shrink") and scaleableObject.scale.x > .2:
 		scaleableObject.scale -= Vector3(.01,.01,.01)
 		
 	if parent.call("getAutoRotateObject"):
 		object.rotation += Vector3(.002,.002,.002)
 		
-	referanceObject.visible = parent.call("getGhostHidden")
+	referanceObject.visible = not parent.call("getGhostHidden")
 
 func setCharacterSprite() -> void:
 	var randomInt : int = randi_range(0,2)
@@ -82,12 +91,14 @@ func setObjective() -> void :
 	var randInt2 : int = randi_range(1,10)
 	objectiveValue  = randInt2 * 5
 	
+	objectiveText.text = "make the object " + str(objectiveValue) + "% " + str(objective)
+	
 # @method used to play the inital animations, sounds and text reveals when a new customer enters the scene
 func playAnimation() -> void:
 	animationPlayer.play("swoopIn")
-	audioStreamPlayer.pitch_scale = randf_range(.5,1.5)
-	audioStreamPlayer.play()
-	label3D.text = textLines[objective][randi_range(0,2)]
+	audioPlayerSwoop.pitch_scale = randf_range(.5,1.5)
+	audioPlayerSwoop.play()
+	flavorText.text = textLines[objective][randi_range(0,2)]
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "swoopIn":

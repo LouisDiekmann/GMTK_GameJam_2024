@@ -1,8 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dp607or8adtk3"]
+[gd_scene load_steps=14 format=3 uid="uid://dp607or8adtk3"]
 
 [ext_resource type="Script" path="res://Scripts/customer.gd" id="1_ojrj1"]
 [ext_resource type="AudioStream" uid="uid://c472we8hv382n" path="res://Assets/audio/effects/swoop.mp3" id="2_kmn64"]
 [ext_resource type="Texture2D" uid="uid://btmm25on3qua0" path="res://Assets/textures/characters/character1.png" id="2_mvi4w"]
+[ext_resource type="AudioStream" uid="uid://dewsvcpqunhee" path="res://Assets/audio/effects/click.mp3" id="3_dvha7"]
+[ext_resource type="FontFile" uid="uid://ct6smy7u6cp8i" path="res://Assets/fonts/IndieFlower-Regular.ttf" id="5_fiqpe"]
+[ext_resource type="FontFile" uid="uid://b3dmrm1q3euf4" path="res://Assets/fonts/NotoSans-Light.ttf" id="6_g0pwk"]
 
 [sub_resource type="Animation" id="Animation_nl73v"]
 length = 0.001
@@ -84,12 +87,15 @@ material = SubResource("ORMMaterial3D_qsjmi")
 script = ExtResource("1_ojrj1")
 characterSprite = NodePath("characterSprite")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="playerSwoop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_kmn64")
 pitch_scale = 0.48
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25869, 1.07155, 1)
+[node name="click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_dvha7")
+volume_db = -3.692
+playback_type = 1
+parameters/looping = true
 
 [node name="characterSprite" type="Sprite3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -10, 0, 1)
@@ -102,6 +108,19 @@ libraries = {
 "": SubResource("AnimationLibrary_83ksp")
 }
 autoplay = "wobble"
+
+[node name="flavorText" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 1.36848, 1)
+font = ExtResource("5_fiqpe")
+font_size = 48
+horizontal_alignment = 0
+
+[node name="objectiveText" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 1.10641, 1)
+font = ExtResource("6_g0pwk")
+font_size = 24
+horizontal_alignment = 0
+uppercase = true
 
 [node name="object" type="Node3D" parent="."]
 transform = Transform3D(0.936213, 0.351433, 0, -0.324682, 0.864948, -0.382683, -0.134488, 0.358273, 0.92388, 1.89209, 0, 1)
