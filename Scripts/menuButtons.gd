@@ -14,3 +14,7 @@ func _process(delta: float) -> void:
 func _on_play_button_down() -> void:
 	menuNode.openCurtains()
 	mainNode.startGame()
+
+
+func _on_credits_button_down() -> void:
+	menuNode.panel.visible = not menuNode.panel.visible

@@ -20,8 +20,13 @@ text = "Play"
 layout_mode = 2
 text = "Settings"
 
+[node name="Credits" type="Button" parent="."]
+layout_mode = 2
+text = "Credits"
+
 [node name="Exit" type="Button" parent="."]
 layout_mode = 2
 text = "Settings"
 
 [connection signal="button_down" from="Play" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="Credits" to="." method="_on_credits_button_down"]

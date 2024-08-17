@@ -3,7 +3,7 @@ extends CanvasLayer
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var audioOpenCurtain: AudioStreamPlayer = $curtainOpen
 @onready var audioCloseCurtain: AudioStreamPlayer = $curtainClose
-
+@onready var panel: Panel = $Panel
 @onready var menuButtons: VBoxContainer = $menuButtons
 
 

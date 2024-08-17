@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bm4bgpxv7fvot"]
+[gd_scene load_steps=19 format=3 uid="uid://bm4bgpxv7fvot"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_032sg"]
 [ext_resource type="PackedScene" uid="uid://o75eaxe4f6nm" path="res://Scenes/ui.tscn" id="1_hbtbv"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://deptrquw54yhf" path="res://Assets/audio/effects/curtainClose.mp3" id="7_hbcox"]
 [ext_resource type="PackedScene" uid="uid://d10hrryhtj13j" path="res://Scenes/menuButtons.tscn" id="8_7d6uk"]
 [ext_resource type="Texture2D" uid="uid://dfm4en1e4h5wa" path="res://Assets/textures/background.png" id="10_5mpya"]
+[ext_resource type="AudioStream" uid="uid://b0aqdq02yx8m4" path="res://Assets/audio/music/SCP-x6x.mp3" id="12_ypegv"]
 
 [sub_resource type="Animation" id="Animation_lwufo"]
 length = 0.001
@@ -102,6 +103,9 @@ _data = {
 "openCurtains": SubResource("Animation_ltd14")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_mjumy"]
+font_size = 11
+
 [sub_resource type="Environment" id="Environment_mer0o"]
 
 [node name="main" type="Node3D"]
@@ -152,11 +156,50 @@ stream = ExtResource("7_hbcox")
 menuNode = NodePath("..")
 mainNode = NodePath("../..")
 
+[node name="Panel" type="Panel" parent="menu"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 61.0
+offset_top = -200.0
+offset_right = 461.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="menu/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.0
+offset_top = -179.0
+offset_right = 179.0
+offset_bottom = 179.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="menu/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "\"SCP-x6x (Hopes)\" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/"
+label_settings = SubResource("LabelSettings_mjumy")
+autowrap_mode = 3
+
 [node name="CanvasLayer" parent="." node_paths=PackedStringArray("mainNode") instance=ExtResource("1_hbtbv")]
 mainNode = NodePath("..")
 
 [node name="background" type="Sprite3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.1, 0)
 texture = ExtResource("10_5mpya")
 
 [node name="player" type="Node3D" parent="."]
@@ -174,3 +217,9 @@ environment = SubResource("Environment_mer0o")
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 3)
 omni_range = 12.936
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_ypegv")
+volume_db = -9.846
+autoplay = true
+parameters/looping = true

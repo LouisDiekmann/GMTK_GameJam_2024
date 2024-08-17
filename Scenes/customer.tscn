@@ -122,6 +122,13 @@ font_size = 24
 horizontal_alignment = 0
 uppercase = true
 
+[node name="cheatLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0.98162, 1)
+font = ExtResource("6_g0pwk")
+font_size = 24
+horizontal_alignment = 0
+uppercase = true
+
 [node name="object" type="Node3D" parent="."]
 transform = Transform3D(0.936213, 0.351433, 0, -0.324682, 0.864948, -0.382683, -0.134488, 0.358273, 0.92388, 1.89209, 0, 1)
 

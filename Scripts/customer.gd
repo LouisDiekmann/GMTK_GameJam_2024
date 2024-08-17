@@ -19,6 +19,7 @@ var objectiveValue : int
 
 @onready var flavorText: Label3D = $flavorText
 @onready var objectiveText: Label3D = $objectiveText
+@onready var cheatLabel: Label3D = $cheatLabel
 
 @onready var textLines : Dictionary = {
 	"smaller" : {
@@ -36,7 +37,6 @@ var objectiveValue : int
 var objects : Array[MeshInstance3D]
 var prompt : Array
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	setCharacterSprite()
 	setCharacterVoice()
@@ -47,6 +47,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	calculateRelativeVolume()
+	calculateRelativeSurface()
+		
 	if Input.is_action_just_pressed("enlarge") or Input.is_action_just_pressed("shrink"):
 		audioClick.pitch_scale = randf_range(.8,1.2)
 		audioClick.play()
@@ -62,6 +65,25 @@ func _process(delta: float) -> void:
 		object.rotation += Vector3(.002,.002,.002)
 		
 	referanceObject.visible = not parent.call("getGhostHidden")
+
+func calculateRelativeVolume() -> float:
+	var scaledVec3 : Vector3 = scaleableObject.scale
+	var scaledObjectVolume : float = scaledVec3.x * scaledVec3.y * scaledVec3.z
+	var referanceVec3 : Vector3 = referanceObject.scale
+	var referanceObjectVolume : float = referanceVec3.x * referanceVec3.y * referanceVec3.z
+	
+	var x := floorf((referanceObjectVolume * (scaledObjectVolume / 100)) * 100)
+	
+	print(scaledObjectVolume)
+	print("R", referanceObjectVolume)
+	
+	cheatLabel.text = str(x) + " times bigger"
+	
+	
+	return 1
+	
+func calculateRelativeSurface() -> float:
+	return 1
 
 func setCharacterSprite() -> void:
 	var randomInt : int = randi_range(0,2)
