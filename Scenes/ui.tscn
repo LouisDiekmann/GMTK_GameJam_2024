@@ -26,5 +26,17 @@ text = "confirm edit"
 layout_mode = 2
 text = "next customer"
 
+[node name="stop rotation" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "stop rotation"
+
+[node name="hide ghost" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "hide ghost"
+
 [connection signal="pressed" from="VBoxContainer/confirm" to="." method="_on_confirm_pressed"]
 [connection signal="pressed" from="VBoxContainer/next" to="." method="_on_next_pressed"]
+[connection signal="toggled" from="VBoxContainer/stop rotation" to="." method="_on_stop_rotation_toggled"]
+[connection signal="toggled" from="VBoxContainer/hide ghost" to="." method="_on_hide_ghost_toggled"]

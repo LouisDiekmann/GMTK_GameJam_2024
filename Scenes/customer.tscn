@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://Scripts/customer.gd" id="1_ojrj1"]
 [ext_resource type="AudioStream" uid="uid://c472we8hv382n" path="res://Assets/audio/effects/swoop.mp3" id="2_kmn64"]
 [ext_resource type="Texture2D" uid="uid://btmm25on3qua0" path="res://Assets/textures/characters/character1.png" id="2_mvi4w"]
-[ext_resource type="Script" path="res://Scripts/object.gd" id="4_ngmvm"]
 
 [sub_resource type="Animation" id="Animation_nl73v"]
 length = 0.001
@@ -41,10 +40,10 @@ tracks/0/path = NodePath("characterSprite:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.98),
-"transitions": PackedFloat32Array(0.353553, 22.6274),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.353553, 1),
 "update": 0,
-"values": [Vector3(-10, 0, 1), Vector3(-3, 0, 1)]
+"values": [Vector3(-10, 0, 1), Vector3(-2.7, 0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_awt8y"]
@@ -71,10 +70,15 @@ _data = {
 "wobble": SubResource("Animation_awt8y")
 }
 
-[sub_resource type="BoxMesh" id="BoxMesh_mhopd"]
+[sub_resource type="BoxMesh" id="BoxMesh_ubf74"]
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_e2axw"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_qsjmi"]
+transparency = 1
+blend_mode = 1
+no_depth_test = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_yarmq"]
+material = SubResource("ORMMaterial3D_qsjmi")
 
 [node name="customer" type="Node3D" node_paths=PackedStringArray("characterSprite")]
 script = ExtResource("1_ojrj1")
@@ -101,19 +105,13 @@ autoplay = "wobble"
 
 [node name="object" type="Node3D" parent="."]
 transform = Transform3D(0.936213, 0.351433, 0, -0.324682, 0.864948, -0.382683, -0.134488, 0.358273, 0.92388, 1.89209, 0, 1)
-script = ExtResource("4_ngmvm")
-autoRotate = true
 
-[node name="Area3D" type="Area3D" parent="object"]
-transform = Transform3D(1, 2.6077e-08, 0, -3.72529e-09, 1, 0, 7.45058e-09, -2.98023e-08, 1, 0, 0, 0)
+[node name="scaleable" type="MeshInstance3D" parent="object"]
+transform = Transform3D(1, 7.45058e-09, 2.98023e-08, -3.72529e-08, 1, -2.98023e-08, 7.45058e-09, -8.9407e-08, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_ubf74")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="object/Area3D"]
-transform = Transform3D(1, -5.96046e-08, 3.72529e-08, -3.35276e-08, 1, -2.98023e-08, 7.45058e-09, -5.96046e-08, 1, 0, 0, 0)
-mesh = SubResource("BoxMesh_mhopd")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="object/Area3D"]
-transform = Transform3D(1, -5.96046e-08, 3.72529e-08, -3.35276e-08, 1, -2.98023e-08, 7.45058e-09, -5.96046e-08, 1, 0, 0, 0)
-shape = SubResource("ConcavePolygonShape3D_e2axw")
+[node name="referance" type="MeshInstance3D" parent="object"]
+transform = Transform3D(1, 7.45058e-09, 2.98023e-08, -3.72529e-08, 1, -2.98023e-08, 7.45058e-09, -8.9407e-08, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_yarmq")
 
 [connection signal="animation_finished" from="characterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

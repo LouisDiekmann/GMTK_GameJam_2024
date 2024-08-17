@@ -1,19 +1,133 @@
-[gd_scene load_steps=7 format=3 uid="uid://bm4bgpxv7fvot"]
+[gd_scene load_steps=16 format=3 uid="uid://bm4bgpxv7fvot"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_032sg"]
 [ext_resource type="PackedScene" uid="uid://o75eaxe4f6nm" path="res://Scenes/ui.tscn" id="1_hbtbv"]
 [ext_resource type="Texture2D" uid="uid://1efe2qb444w0" path="res://Assets/TEMP/k2j86njz.bmp" id="1_kcbfq"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="2_cdgvj"]
+[ext_resource type="Script" path="res://Scripts/menu.gd" id="2_p76ab"]
+[ext_resource type="Texture2D" uid="uid://bgyauupmj5uo7" path="res://Assets/textures/curtainLeft.png" id="3_qfwvv"]
+[ext_resource type="Texture2D" uid="uid://bska0rx27lpul" path="res://Assets/textures/curtainRight.png" id="4_ojr1x"]
 [ext_resource type="Texture2D" uid="uid://s074jktwig77" path="res://Assets/textures/curtain2.png" id="5_f8s0e"]
+[ext_resource type="AudioStream" uid="uid://dn43057162i48" path="res://Assets/audio/effects/curtain.mp3" id="6_wmtdr"]
+[ext_resource type="AudioStream" uid="uid://deptrquw54yhf" path="res://Assets/audio/effects/curtainClose.mp3" id="7_hbcox"]
+
+[sub_resource type="Animation" id="Animation_gjw1p"]
+resource_name = "closeCurtains"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("curtainLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(5.09824, 1),
+"update": 0,
+"values": [Vector2(-960, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("curtainRight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(5.09824, 1),
+"update": 0,
+"values": [Vector2(960, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ltd14"]
+resource_name = "openCurtains"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("curtainLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.499183),
+"transitions": PackedFloat32Array(2.73208, 2.92817),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-960, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("curtainRight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.499183),
+"transitions": PackedFloat32Array(2.73208, 2.92817),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(960, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lwufo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("curtainLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("curtainRight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_58ojm"]
+_data = {
+"RESET": SubResource("Animation_lwufo"),
+"closeCurtains": SubResource("Animation_gjw1p"),
+"openCurtains": SubResource("Animation_ltd14")
+}
 
 [sub_resource type="Environment" id="Environment_mer0o"]
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_032sg")
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+[node name="menu" type="CanvasLayer" parent="."]
+script = ExtResource("2_p76ab")
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
+[node name="curtainLeft" type="TextureRect" parent="menu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_qfwvv")
+expand_mode = 1
+
+[node name="curtainRight" type="TextureRect" parent="menu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_ojr1x")
+expand_mode = 1
+
+[node name="curtainSide" type="TextureRect" parent="menu"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -21,6 +135,17 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_f8s0e")
 expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="menu"]
+libraries = {
+"": SubResource("AnimationLibrary_58ojm")
+}
+
+[node name="curtainOpen" type="AudioStreamPlayer" parent="menu"]
+stream = ExtResource("6_wmtdr")
+
+[node name="curtainClose" type="AudioStreamPlayer" parent="menu"]
+stream = ExtResource("7_hbcox")
 
 [node name="CanvasLayer" parent="." node_paths=PackedStringArray("mainNode") instance=ExtResource("1_hbtbv")]
 mainNode = NodePath("..")

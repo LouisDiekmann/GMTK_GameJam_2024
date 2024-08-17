@@ -3,8 +3,15 @@ class_name Customer
 
 var objective : String
 var objectiveValue : int
+var autoRotate : bool
 @export var characterSprite: Sprite3D
+
+@onready var parent : Node3D = get_parent()
+
 @onready var object: Node3D = $object
+@onready var scaleableObject: MeshInstance3D = $object/scaleable
+@onready var referanceObject: MeshInstance3D = $object/referance
+
 @onready var objectSizeVectorLength : float = object.scale.length()
 @onready var animationPlayer: AnimationPlayer = $characterSprite/AnimationPlayer
 @onready var audioStreamPlayer: AudioStreamPlayer = $AudioStreamPlayer
@@ -38,13 +45,15 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("enlarge") and object.scale.x < 2:
-		object.scale += Vector3(.01,.01,.01)
+		scaleableObject.scale += Vector3(.01,.01,.01)
 	if Input.is_action_pressed("shrink") and object.scale.x > .5:
-		object.scale -= Vector3(.01,.01,.01)
+		scaleableObject.scale -= Vector3(.01,.01,.01)
 		
-func _init() -> void:
-	pass
-	
+	if parent.call("getAutoRotateObject"):
+		object.rotation += Vector3(.002,.002,.002)
+		
+	referanceObject.visible = parent.call("getGhostHidden")
+
 func setCharacterSprite() -> void:
 	var randomInt : int = randi_range(0,2)
 	characterSprite.scale = Vector3(.2,.2,.2)
