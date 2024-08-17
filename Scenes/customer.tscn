@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dp607or8adtk3"]
+[gd_scene load_steps=11 format=3 uid="uid://dp607or8adtk3"]
 
 [ext_resource type="Script" path="res://Scripts/customer.gd" id="1_ojrj1"]
 [ext_resource type="AudioStream" uid="uid://c472we8hv382n" path="res://Assets/audio/effects/swoop.mp3" id="2_kmn64"]
 [ext_resource type="Texture2D" uid="uid://btmm25on3qua0" path="res://Assets/textures/characters/character1.png" id="2_mvi4w"]
+[ext_resource type="Script" path="res://Scripts/object.gd" id="4_ngmvm"]
 
 [sub_resource type="Animation" id="Animation_nl73v"]
 length = 0.001
@@ -85,7 +86,6 @@ pitch_scale = 0.48
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25869, 1.07155, 1)
-text = "I need this to be 15% bigger"
 
 [node name="characterSprite" type="Sprite3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -10, 0, 1)
@@ -101,6 +101,8 @@ autoplay = "wobble"
 
 [node name="object" type="Node3D" parent="."]
 transform = Transform3D(0.936213, 0.351433, 0, -0.324682, 0.864948, -0.382683, -0.134488, 0.358273, 0.92388, 1.89209, 0, 1)
+script = ExtResource("4_ngmvm")
+autoRotate = true
 
 [node name="Area3D" type="Area3D" parent="object"]
 transform = Transform3D(1, 2.6077e-08, 0, -3.72529e-09, 1, 0, 7.45058e-09, -2.98023e-08, 1, 0, 0, 0)

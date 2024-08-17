@@ -1,14 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://bm4bgpxv7fvot"]
+[gd_scene load_steps=7 format=3 uid="uid://bm4bgpxv7fvot"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_032sg"]
 [ext_resource type="PackedScene" uid="uid://o75eaxe4f6nm" path="res://Scenes/ui.tscn" id="1_hbtbv"]
 [ext_resource type="Texture2D" uid="uid://1efe2qb444w0" path="res://Assets/TEMP/k2j86njz.bmp" id="1_kcbfq"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="2_cdgvj"]
+[ext_resource type="Texture2D" uid="uid://s074jktwig77" path="res://Assets/textures/curtain2.png" id="5_f8s0e"]
 
 [sub_resource type="Environment" id="Environment_mer0o"]
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_032sg")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_f8s0e")
+expand_mode = 1
 
 [node name="CanvasLayer" parent="." node_paths=PackedStringArray("mainNode") instance=ExtResource("1_hbtbv")]
 mainNode = NodePath("..")
