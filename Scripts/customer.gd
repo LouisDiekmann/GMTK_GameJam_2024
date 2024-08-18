@@ -82,7 +82,6 @@ func scaleObject() -> void:
 
 func calculateRelativeSizes() -> Vector3:
 	var scaledVec3 : Vector3 = scaleableObject.scale
-	var referanceVec3 : Vector3 = referanceObject.scale
 	
 	var volumeInPercent : float = (scaledVec3.x * scaledVec3.y * scaledVec3.z) * 100
 	var surfaceInPercent : float = (scaledVec3.x * scaledVec3.y) *100

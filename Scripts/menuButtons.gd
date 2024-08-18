@@ -29,10 +29,11 @@ func _on_resume_button_down() -> void:
 
 func _on_credits_button_down() -> void:
 	paper.play()
-	menuNode.panel.visible = not menuNode.panel.visible
+	menuNode.creditsPanel.visible = not menuNode.creditsPanel.visible
 
 func _on_settings_button_down() -> void:
 	paper.play()
+	menuNode.settingsPanel.visible = not menuNode.settingsPanel.visible
 
 func _on_exit_button_down() -> void:
 	get_tree().quit()

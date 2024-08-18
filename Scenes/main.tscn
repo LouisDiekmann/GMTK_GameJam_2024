@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bm4bgpxv7fvot"]
+[gd_scene load_steps=20 format=3 uid="uid://bm4bgpxv7fvot"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_032sg"]
 [ext_resource type="PackedScene" uid="uid://o75eaxe4f6nm" path="res://Scenes/ui.tscn" id="1_hbtbv"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://dn43057162i48" path="res://Assets/audio/effects/curtain.mp3" id="6_wmtdr"]
 [ext_resource type="AudioStream" uid="uid://deptrquw54yhf" path="res://Assets/audio/effects/curtainClose.mp3" id="7_hbcox"]
 [ext_resource type="PackedScene" uid="uid://d10hrryhtj13j" path="res://Scenes/menuButtons.tscn" id="8_7d6uk"]
+[ext_resource type="Script" path="res://Scripts/gameVolume.gd" id="9_6y4yb"]
 [ext_resource type="Texture2D" uid="uid://dfm4en1e4h5wa" path="res://Assets/textures/background.png" id="10_5mpya"]
 [ext_resource type="AudioStream" uid="uid://b0aqdq02yx8m4" path="res://Assets/audio/music/SCP-x6x.mp3" id="12_ypegv"]
 
@@ -156,21 +157,21 @@ stream = ExtResource("7_hbcox")
 menuNode = NodePath("..")
 mainNode = NodePath("../..")
 
-[node name="Panel" type="Panel" parent="menu"]
+[node name="Credits" type="Panel" parent="menu"]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 61.0
+offset_left = 130.0
 offset_top = -200.0
-offset_right = 461.0
+offset_right = 530.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="menu/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="menu/Credits"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -184,10 +185,10 @@ offset_bottom = 179.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="menu/Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/Credits/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="menu/Panel/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="menu/Credits/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 text = "MUSIC:
@@ -199,6 +200,58 @@ MESHES:
 thebasemesh.com"
 label_settings = SubResource("LabelSettings_mjumy")
 autowrap_mode = 3
+
+[node name="Settings" type="Panel" parent="menu"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 130.0
+offset_top = -200.0
+offset_right = 530.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="menu/Settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.0
+offset_top = -179.0
+offset_right = 179.0
+offset_bottom = 179.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/Settings/MarginContainer"]
+layout_mode = 2
+
+[node name="gameVolumeLabel" type="Label" parent="menu/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Volume"
+
+[node name="gameVolume" type="HSlider" parent="menu/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+value = 100.0
+script = ExtResource("9_6y4yb")
+bus_name = "Master"
+val = 35
+
+[node name="musicVolumeLabel" type="Label" parent="menu/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="musicVolume" type="HSlider" parent="menu/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+value = 100.0
+script = ExtResource("9_6y4yb")
+bus_name = "Music"
 
 [node name="scoreLabel" type="Label" parent="menu"]
 anchors_preset = 5
@@ -240,3 +293,6 @@ stream = ExtResource("12_ypegv")
 volume_db = -9.846
 autoplay = true
 parameters/looping = true
+
+[connection signal="drag_ended" from="menu/Settings/MarginContainer/VBoxContainer/gameVolume" to="menu" method="_on_game_volume_drag_ended"]
+[connection signal="drag_ended" from="menu/Settings/MarginContainer/VBoxContainer/musicVolume" to="menu" method="_on_music_volume_drag_ended"]

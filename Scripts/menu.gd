@@ -3,7 +3,8 @@ extends CanvasLayer
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var audioOpenCurtain: AudioStreamPlayer = $curtainOpen
 @onready var audioCloseCurtain: AudioStreamPlayer = $curtainClose
-@onready var panel: Panel = $Panel
+@onready var creditsPanel: Panel = $Credits
+@onready var settingsPanel: Panel = $Settings
 @onready var menuButtons: VBoxContainer = $menuButtons
 
 
@@ -28,11 +29,9 @@ func openCurtains() -> void:
 	audioOpenCurtain.play()
 	menuButtons.visible = false
 	curtainsClosed = not curtainsClosed
-	
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	menuButtons.visible = true
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_game_volume_drag_ended(value_changed: bool) -> void:
+	var busIndex : int = AudioServer.get_bus_index("Master")
+	
+func _on_music_volume_drag_ended(value_changed: bool) -> void:
+	pass # Replace with function body.
