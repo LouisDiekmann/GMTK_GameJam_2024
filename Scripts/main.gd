@@ -70,12 +70,6 @@ func removeCurrentCustomer() -> void:
 func nextCustomer() -> void:
 	currentCustomer = newCustomer.instantiate()
 	add_child(currentCustomer)
-	
-func stopRotationToggled(toggled : bool) -> void:
-	autoRotateObject = not toggled
-	
-func hideGhostObject(toggled : bool) -> void:
-	ghostHidden = toggled
 
 func getAutoRotateObject() -> bool:
 	return autoRotateObject

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d10hrryhtj13j"]
+[gd_scene load_steps=4 format=3 uid="uid://d10hrryhtj13j"]
 
 [ext_resource type="Script" path="res://Scripts/menuButtons.gd" id="1_h2g2n"]
 [ext_resource type="AudioStream" uid="uid://bn6bn5wy26t50" path="res://Assets/audio/effects/paper2.mp3" id="2_fbmba"]
+[ext_resource type="AudioStream" uid="uid://jvwop66g71j1" path="res://Assets/audio/effects/paper3.mp3" id="3_qk51b"]
 
 [node name="VBoxContainer" type="VBoxContainer"]
 anchors_preset = 8
@@ -9,6 +10,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -29.0
+offset_top = -55.0
+offset_right = 33.0
+offset_bottom = 53.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h2g2n")
@@ -38,8 +43,17 @@ text = "Exit"
 stream = ExtResource("2_fbmba")
 volume_db = 3.692
 
+[node name="paper2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qk51b")
+pitch_scale = 1.47
+
 [connection signal="button_down" from="Play" to="." method="_on_play_button_down"]
+[connection signal="mouse_entered" from="Play" to="." method="_on_mouse_entered"]
 [connection signal="button_down" from="Resume" to="." method="_on_resume_button_down"]
+[connection signal="mouse_entered" from="Resume" to="." method="_on_mouse_entered"]
 [connection signal="button_down" from="Settings" to="." method="_on_settings_button_down"]
+[connection signal="mouse_entered" from="Settings" to="." method="_on_mouse_entered"]
 [connection signal="button_down" from="Credits" to="." method="_on_credits_button_down"]
+[connection signal="mouse_entered" from="Credits" to="." method="_on_mouse_entered"]
 [connection signal="button_down" from="Exit" to="." method="_on_exit_button_down"]
+[connection signal="mouse_entered" from="Exit" to="." method="_on_mouse_entered"]

@@ -3,13 +3,19 @@ class_name Customer
 
 var objective : Dictionary
 var relativeSizes : Vector3
-
+var rotating : bool = true
+var ghost : bool = true
 var scaleable : bool = false
+var scaleSpeed : int = 50
 
 @onready var autoRotate : bool = true
 @export var characterSprite: Sprite3D
 
 @onready var parent : Node3D = get_parent()
+
+@onready var ghostButton: TextureButton = $objectController/VBoxContainer/ghostButton
+@onready var rotateButton: TextureButton = $objectController/VBoxContainer/rotateButton
+
 
 @onready var object: Node3D = $object
 @onready var scaleableObject: StaticBody3D = $object/scaleable
@@ -56,10 +62,10 @@ func _process(delta: float) -> void:
 	if scaleable:
 		scaleObject()
 		
-	if parent.call("getAutoRotateObject"):
+	if rotating:
 		object.rotation += Vector3(.002,.002,.002)
-		
-	referanceObject.visible = not parent.call("getGhostHidden")
+
+	referanceObject.visible = ghost
 
 func scaleObject() -> void:
 	if Input.is_action_just_pressed("enlarge") or Input.is_action_just_pressed("shrink"):
@@ -68,10 +74,11 @@ func scaleObject() -> void:
 	if Input.is_action_just_released("enlarge") or Input.is_action_just_released("shrink"):
 		audioClick.stop()
 	
+	var scaler : Vector3 = Vector3(0.0001 * scaleSpeed, 0.0001 * scaleSpeed, 0.0001 * scaleSpeed)
 	if Input.is_action_pressed("enlarge") and scaleableObject.scale.x < 2:
-		scaleableObject.scale += Vector3(.01,.01,.01)
+		scaleableObject.scale += scaler
 	if Input.is_action_pressed("shrink") and scaleableObject.scale.x > .2:
-		scaleableObject.scale -= Vector3(.01,.01,.01)
+		scaleableObject.scale -= scaler
 
 func calculateRelativeSizes() -> Vector3:
 	var scaledVec3 : Vector3 = scaleableObject.scale
@@ -161,9 +168,21 @@ func getRelativeSizes() -> Vector3:
 func getObjective() -> Dictionary:
 	return objective
 
-
 func _on_scaleable_mouse_entered() -> void:
 	scaleable = true
 
 func _on_scaleable_mouse_exited() -> void:
 	scaleable = false
+
+
+func _on_ghost_button_toggled(toggled_on: bool) -> void:
+	ghost = not toggled_on
+	
+func _on_rotate_button_toggled(toggled_on: bool) -> void:
+	rotating = not toggled_on
+
+func _on_button_mouse_entered() -> void:
+	$paper2.play()
+
+func _on_scale_speed_drag_ended(value_changed: bool) -> void:
+	scaleSpeed = $objectController/VBoxContainer/scaleSpeed.value

@@ -1,11 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://dp607or8adtk3"]
+[gd_scene load_steps=21 format=3 uid="uid://dp607or8adtk3"]
 
 [ext_resource type="Script" path="res://Scripts/customer.gd" id="1_ojrj1"]
 [ext_resource type="AudioStream" uid="uid://c472we8hv382n" path="res://Assets/audio/effects/swoop.mp3" id="2_kmn64"]
 [ext_resource type="Texture2D" uid="uid://btmm25on3qua0" path="res://Assets/textures/characters/character1.png" id="2_mvi4w"]
 [ext_resource type="AudioStream" uid="uid://dewsvcpqunhee" path="res://Assets/audio/effects/click.mp3" id="3_dvha7"]
+[ext_resource type="AudioStream" uid="uid://jvwop66g71j1" path="res://Assets/audio/effects/paper3.mp3" id="4_fjprn"]
 [ext_resource type="FontFile" uid="uid://ct6smy7u6cp8i" path="res://Assets/fonts/IndieFlower-Regular.ttf" id="5_fiqpe"]
 [ext_resource type="FontFile" uid="uid://b3dmrm1q3euf4" path="res://Assets/fonts/NotoSans-Light.ttf" id="6_g0pwk"]
+[ext_resource type="Texture2D" uid="uid://dlqcheqt2kc1t" path="res://Assets/textures/GhostButton.png" id="7_4xf5i"]
+[ext_resource type="Texture2D" uid="uid://4fr8avab4odq" path="res://Assets/textures/GhostButtonOff.png" id="8_saek4"]
+[ext_resource type="Texture2D" uid="uid://deshs6xfqgvv8" path="res://Assets/textures/RotateButton.png" id="9_8vlim"]
+[ext_resource type="Texture2D" uid="uid://cdchu0o7lpo5o" path="res://Assets/textures/RotateButtonOff.png" id="10_aubic"]
 
 [sub_resource type="Animation" id="Animation_nl73v"]
 length = 0.001
@@ -105,6 +110,10 @@ volume_db = -3.692
 playback_type = 1
 parameters/looping = true
 
+[node name="paper2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_fjprn")
+pitch_scale = 1.5
+
 [node name="characterSprite" type="Sprite3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -10, 0, 1)
 render_priority = 1
@@ -200,6 +209,40 @@ custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 autowrap_mode = 3
 
+[node name="objectController" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="objectController"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -114.0
+offset_top = 45.0
+offset_right = -34.0
+offset_bottom = 229.0
+grow_horizontal = 0
+
+[node name="ghostButton" type="TextureButton" parent="objectController/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("7_4xf5i")
+texture_pressed = ExtResource("8_saek4")
+
+[node name="rotateButton" type="TextureButton" parent="objectController/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("9_8vlim")
+texture_pressed = ExtResource("10_aubic")
+
+[node name="scaleSpeed" type="HSlider" parent="objectController/VBoxContainer"]
+layout_mode = 2
+min_value = 10.0
+value = 50.0
+
 [connection signal="animation_finished" from="characterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="mouse_entered" from="object/scaleable" to="." method="_on_scaleable_mouse_entered"]
 [connection signal="mouse_exited" from="object/scaleable" to="." method="_on_scaleable_mouse_exited"]
+[connection signal="mouse_entered" from="objectController/VBoxContainer/ghostButton" to="." method="_on_button_mouse_entered"]
+[connection signal="toggled" from="objectController/VBoxContainer/ghostButton" to="." method="_on_ghost_button_toggled"]
+[connection signal="mouse_entered" from="objectController/VBoxContainer/rotateButton" to="." method="_on_button_mouse_entered"]
+[connection signal="toggled" from="objectController/VBoxContainer/rotateButton" to="." method="_on_rotate_button_toggled"]
+[connection signal="drag_ended" from="objectController/VBoxContainer/scaleSpeed" to="." method="_on_scale_speed_drag_ended"]

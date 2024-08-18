@@ -1,0 +1,8 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://0kf1184fmink"]
+
+[ext_resource type="Texture2D" uid="uid://dvrrsx4mkwna8" path="res://Assets/textures/uiBG.png" id="1_f30r2"]
+
+[resource]
+texture = ExtResource("1_f30r2")
+expand_margin_left = 20.0
+expand_margin_right = 20.0

@@ -3,6 +3,7 @@ extends VBoxContainer
 @export var menuNode : CanvasLayer
 @export var mainNode : Node3D
 @onready var paper: AudioStreamPlayer = $paper
+@onready var paper2: AudioStreamPlayer = $paper2
 @onready var play: Button = $Play
 @onready var resume: Button = $Resume
 
@@ -35,3 +36,6 @@ func _on_settings_button_down() -> void:
 
 func _on_exit_button_down() -> void:
 	get_tree().quit()
+
+func _on_mouse_entered() -> void:
+	paper2.play()

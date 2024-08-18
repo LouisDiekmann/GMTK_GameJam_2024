@@ -15,9 +15,3 @@ func _on_confirm_pressed() -> void:
 
 func _on_next_pressed() -> void:
 	mainNode.call("nextCustomerPressed")
-
-func _on_stop_rotation_toggled(toggled_on: bool) -> void:
-	mainNode.call("stopRotationToggled", toggled_on)
-
-func _on_hide_ghost_toggled(toggled_on: bool) -> void:
-	mainNode.call("hideGhostObject", toggled_on)
