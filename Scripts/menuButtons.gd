@@ -15,7 +15,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
 func _on_play_button_down() -> void:
 	paper.play()
 	play.visible = false
@@ -26,6 +25,7 @@ func _on_play_button_down() -> void:
 func _on_resume_button_down() -> void:
 	paper.play()
 	menuNode.openCurtains()
+	menuNode.changePauseIcon()
 
 func _on_credits_button_down() -> void:
 	paper.play()

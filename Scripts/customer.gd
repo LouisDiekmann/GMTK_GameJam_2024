@@ -87,8 +87,8 @@ func calculateRelativeSizes() -> Vector3:
 	var surfaceInPercent : float = (scaledVec3.x * scaledVec3.y) *100
 	var scaleInPercent : float = scaledVec3.x * 100
 	
-	var relativeSizes : Vector3 = Vector3(scaleInPercent, surfaceInPercent, volumeInPercent)
-	return relativeSizes
+	var rltvSizes : Vector3 = Vector3(scaleInPercent, surfaceInPercent, volumeInPercent)
+	return rltvSizes
 
 func setCharacterSprite() -> void:
 	var randomInt : int = randi_range(0,2)
@@ -173,7 +173,6 @@ func _on_scaleable_mouse_entered() -> void:
 func _on_scaleable_mouse_exited() -> void:
 	scaleable = false
 
-
 func _on_ghost_button_toggled(toggled_on: bool) -> void:
 	ghost = not toggled_on
 	
@@ -185,3 +184,6 @@ func _on_button_mouse_entered() -> void:
 
 func _on_scale_speed_drag_ended(value_changed: bool) -> void:
 	scaleSpeed = $objectController/VBoxContainer/scaleSpeed.value
+
+func _on_confirm_button_button_down() -> void:
+	parent.confirmSizePressed()

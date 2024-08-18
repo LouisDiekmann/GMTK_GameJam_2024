@@ -1,7 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://bm4bgpxv7fvot"]
+[gd_scene load_steps=21 format=3 uid="uid://bm4bgpxv7fvot"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_032sg"]
-[ext_resource type="PackedScene" uid="uid://o75eaxe4f6nm" path="res://Scenes/ui.tscn" id="1_hbtbv"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="2_cdgvj"]
 [ext_resource type="Script" path="res://Scripts/menu.gd" id="2_p76ab"]
 [ext_resource type="Texture2D" uid="uid://bgyauupmj5uo7" path="res://Assets/textures/curtainLeft.png" id="3_qfwvv"]
@@ -11,7 +10,9 @@
 [ext_resource type="AudioStream" uid="uid://deptrquw54yhf" path="res://Assets/audio/effects/curtainClose.mp3" id="7_hbcox"]
 [ext_resource type="PackedScene" uid="uid://d10hrryhtj13j" path="res://Scenes/menuButtons.tscn" id="8_7d6uk"]
 [ext_resource type="Script" path="res://Scripts/gameVolume.gd" id="9_6y4yb"]
+[ext_resource type="Texture2D" uid="uid://dyi603mb1pwrj" path="res://Assets/textures/pauseButton.png" id="10_1nrp1"]
 [ext_resource type="Texture2D" uid="uid://dfm4en1e4h5wa" path="res://Assets/textures/background.png" id="10_5mpya"]
+[ext_resource type="Texture2D" uid="uid://wmk3vj3fyt3g" path="res://Assets/textures/pauseButtonHover.png" id="11_rksqh"]
 [ext_resource type="AudioStream" uid="uid://b0aqdq02yx8m4" path="res://Assets/audio/music/SCP-x6x.mp3" id="12_ypegv"]
 
 [sub_resource type="Animation" id="Animation_lwufo"]
@@ -265,8 +266,15 @@ grow_horizontal = 2
 text = "0"
 horizontal_alignment = 1
 
-[node name="CanvasLayer" parent="." node_paths=PackedStringArray("mainNode") instance=ExtResource("1_hbtbv")]
-mainNode = NodePath("..")
+[node name="pauseButton" type="TextureButton" parent="menu"]
+visible = false
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 144.0
+offset_bottom = 144.0
+texture_normal = ExtResource("10_1nrp1")
+texture_pressed = ExtResource("11_rksqh")
+texture_hover = ExtResource("11_rksqh")
 
 [node name="background" type="Sprite3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.1, 0)
@@ -296,3 +304,4 @@ parameters/looping = true
 
 [connection signal="drag_ended" from="menu/Settings/MarginContainer/VBoxContainer/gameVolume" to="menu" method="_on_game_volume_drag_ended"]
 [connection signal="drag_ended" from="menu/Settings/MarginContainer/VBoxContainer/musicVolume" to="menu" method="_on_music_volume_drag_ended"]
+[connection signal="button_down" from="menu/pauseButton" to="menu" method="_on_pause_button_button_down"]

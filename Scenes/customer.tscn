@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dp607or8adtk3"]
+[gd_scene load_steps=23 format=3 uid="uid://dp607or8adtk3"]
 
 [ext_resource type="Script" path="res://Scripts/customer.gd" id="1_ojrj1"]
 [ext_resource type="AudioStream" uid="uid://c472we8hv382n" path="res://Assets/audio/effects/swoop.mp3" id="2_kmn64"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://4fr8avab4odq" path="res://Assets/textures/GhostButtonOff.png" id="8_saek4"]
 [ext_resource type="Texture2D" uid="uid://deshs6xfqgvv8" path="res://Assets/textures/RotateButton.png" id="9_8vlim"]
 [ext_resource type="Texture2D" uid="uid://cdchu0o7lpo5o" path="res://Assets/textures/RotateButtonOff.png" id="10_aubic"]
+[ext_resource type="Texture2D" uid="uid://cp4pejnnsixrx" path="res://Assets/textures/confirmOff.png" id="12_bwi1d"]
+[ext_resource type="Texture2D" uid="uid://dudkk3ixux7ir" path="res://Assets/textures/confirm.png" id="13_q3if6"]
 
 [sub_resource type="Animation" id="Animation_nl73v"]
 length = 0.001
@@ -215,10 +217,10 @@ autowrap_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -114.0
-offset_top = 45.0
-offset_right = -34.0
-offset_bottom = 229.0
+offset_left = -144.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = 368.0
 grow_horizontal = 0
 
 [node name="ghostButton" type="TextureButton" parent="objectController/VBoxContainer"]
@@ -238,6 +240,16 @@ layout_mode = 2
 min_value = 10.0
 value = 50.0
 
+[node name="MarginContainer" type="MarginContainer" parent="objectController/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="confirmButton" type="TextureButton" parent="objectController/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("12_bwi1d")
+texture_hover = ExtResource("13_q3if6")
+
 [connection signal="animation_finished" from="characterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="mouse_entered" from="object/scaleable" to="." method="_on_scaleable_mouse_entered"]
 [connection signal="mouse_exited" from="object/scaleable" to="." method="_on_scaleable_mouse_exited"]
@@ -246,3 +258,5 @@ value = 50.0
 [connection signal="mouse_entered" from="objectController/VBoxContainer/rotateButton" to="." method="_on_button_mouse_entered"]
 [connection signal="toggled" from="objectController/VBoxContainer/rotateButton" to="." method="_on_rotate_button_toggled"]
 [connection signal="drag_ended" from="objectController/VBoxContainer/scaleSpeed" to="." method="_on_scale_speed_drag_ended"]
+[connection signal="button_down" from="objectController/VBoxContainer/confirmButton" to="." method="_on_confirm_button_button_down"]
+[connection signal="mouse_entered" from="objectController/VBoxContainer/confirmButton" to="." method="_on_button_mouse_entered"]

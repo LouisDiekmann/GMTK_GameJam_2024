@@ -15,20 +15,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.set_custom_mouse_cursor(cursorGauntlet2)
 	if Input.is_action_just_released("enlarge"):
 		Input.set_custom_mouse_cursor(cursorGauntlet1)
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 	
 func startGame() -> void:
 	nextCustomer()
 
 func confirmSizePressed() -> void:
 	score += validateObjectSize()
-	print(score)
 	scoreLabel.text = str(score)
 	removeCurrentCustomer()
 	nextCustomer()
@@ -39,31 +32,41 @@ func validateObjectSize() -> int:
 	var objective : Dictionary = currentCustomer.getObjective()
 
 	var objectiveSize : float = objective["size"]
-	var sizeDifference : Vector3 = abs(relativeSizes - Vector3(100,100,100))
-	print(sizeDifference)
-	print(objectiveSize)
+	var sizeDifference : Vector3 = relativeSizes - Vector3(100,100,100)
+	
+	var scoreMultiplyer : Vector3
+	if sizeDifference.x > 0:
+		scoreMultiplyer = abs(sizeDifference - Vector3(objectiveSize, objectiveSize, objectiveSize))
+	else:
+		scoreMultiplyer = abs(sizeDifference + Vector3(objectiveSize, objectiveSize, objectiveSize))
+	
+	print("sm: ", scoreMultiplyer)
+	
+	if objective["direction"] == "smaller" and sizeDifference.x > 0:
+		return 0
+	if objective["direction"] == "bigger" and sizeDifference.x < 0:
+		return 0
+		
 	match objective["unit"]:
 		"scale":
-			if abs(sizeDifference.x - objectiveSize) >= 10:
-				thisScore = 500 - abs(sizeDifference.x - objectiveSize)*15
-				if thisScore < 0 : thisScore = 0
-			else:
-				thisScore = 500
+			thisScore = calculateScore(scoreMultiplyer.x)
 		"surface":
-			if abs(sizeDifference.y - objectiveSize) >= 10:
-				thisScore = 500 - abs(sizeDifference.y - objectiveSize)*15
-				if thisScore < 0 : thisScore = 0
-			else:
-				thisScore = 500
+			thisScore = calculateScore(scoreMultiplyer.y)
 		"volume":
-			if abs(sizeDifference.z - objectiveSize) >= 10:
-				thisScore = 500 - abs(sizeDifference.z - objectiveSize)*15
-				if thisScore < 0 : thisScore = 0
-			else:
-				thisScore = 500
-
+			thisScore = calculateScore(scoreMultiplyer.z)
+			
 	return thisScore
-	
+
+func calculateScore(value : float) -> int:
+	var calcScore: int
+	if value >= 10: 
+		calcScore = 500 - int(value) * 15
+		if calcScore < 0: 
+			calcScore = 0
+	else:
+		calcScore = 500
+	return calcScore
+
 func removeCurrentCustomer() -> void:
 	currentCustomer.queue_free()
 
