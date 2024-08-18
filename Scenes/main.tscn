@@ -188,6 +188,7 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="Label" type="Label" parent="menu/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 text = "\"SCP-x6x (Hopes)\" Kevin MacLeod (incompetech.com)
 Licensed under Creative Commons: By Attribution 4.0 License

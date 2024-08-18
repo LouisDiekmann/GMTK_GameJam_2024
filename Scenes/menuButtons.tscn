@@ -17,6 +17,11 @@ script = ExtResource("1_h2g2n")
 layout_mode = 2
 text = "Play"
 
+[node name="Resume" type="Button" parent="."]
+visible = false
+layout_mode = 2
+text = "Resume"
+
 [node name="Settings" type="Button" parent="."]
 layout_mode = 2
 text = "Settings"
@@ -34,6 +39,7 @@ stream = ExtResource("2_fbmba")
 volume_db = 3.692
 
 [connection signal="button_down" from="Play" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="Resume" to="." method="_on_resume_button_down"]
 [connection signal="button_down" from="Settings" to="." method="_on_settings_button_down"]
 [connection signal="button_down" from="Credits" to="." method="_on_credits_button_down"]
 [connection signal="button_down" from="Exit" to="." method="_on_exit_button_down"]

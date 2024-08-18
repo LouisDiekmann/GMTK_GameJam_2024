@@ -1,8 +1,8 @@
 extends Node3D
 class_name Customer
 
-var objective : String
-var objectiveValue : int
+var objective : Dictionary
+var relativeSizes : Vector3
 @onready var autoRotate : bool = true
 @export var characterSprite: Sprite3D
 
@@ -17,9 +17,10 @@ var objectiveValue : int
 @onready var audioPlayerSwoop : AudioStreamPlayer = $playerSwoop
 @onready var audioClick: AudioStreamPlayer = $click
 
-@onready var flavorText: Label3D = $flavorText
-@onready var objectiveText: Label3D = $objectiveText
-@onready var cheatLabel: Label3D = $cheatLabel
+@onready var flavorText: Label = $Panel/MarginContainer/VBoxContainer/flavorText
+@onready var objectiveText: Label = $Panel/MarginContainer/VBoxContainer/objectiveText
+@onready var cheatLabel: Label = $Panel/MarginContainer/VBoxContainer/cheatLabel
+
 
 @onready var textLines : Dictionary = {
 	"smaller" : {
@@ -41,15 +42,16 @@ func _ready() -> void:
 	setCharacterSprite()
 	setCharacterVoice()
 	setObject()
-	setObjective()
+	objective = createObjective()
+	
 	await get_tree().create_timer(.5).timeout
-	playAnimation()
+	setupAndAnimateView()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	calculateRelativeVolume()
-	calculateRelativeSurface()
-		
+	relativeSizes = calculateRelativeSizes()
+	cheatLabel.text = "Scale: " + str(snapped(relativeSizes.x, 0.01) ) + " Surface: " + str(snapped(relativeSizes.y, 0.01)) + " Volume: " + str(snapped(relativeSizes.z, 0.01))
+	
 	if Input.is_action_just_pressed("enlarge") or Input.is_action_just_pressed("shrink"):
 		audioClick.pitch_scale = randf_range(.8,1.2)
 		audioClick.play()
@@ -66,24 +68,16 @@ func _process(delta: float) -> void:
 		
 	referanceObject.visible = not parent.call("getGhostHidden")
 
-func calculateRelativeVolume() -> float:
+func calculateRelativeSizes() -> Vector3:
 	var scaledVec3 : Vector3 = scaleableObject.scale
-	var scaledObjectVolume : float = scaledVec3.x * scaledVec3.y * scaledVec3.z
 	var referanceVec3 : Vector3 = referanceObject.scale
-	var referanceObjectVolume : float = referanceVec3.x * referanceVec3.y * referanceVec3.z
 	
-	var x := floorf((referanceObjectVolume * (scaledObjectVolume / 100)) * 100)
+	var volumeInPercent : float = (scaledVec3.x * scaledVec3.y * scaledVec3.z) * 100
+	var surfaceInPercent : float = (scaledVec3.x * scaledVec3.y) *100
+	var scaleInPercent : float = scaledVec3.x * 100
 	
-	print(scaledObjectVolume)
-	print("R", referanceObjectVolume)
-	
-	cheatLabel.text = str(x) + " times bigger"
-	
-	
-	return 1
-	
-func calculateRelativeSurface() -> float:
-	return 1
+	var relativeSizes : Vector3 = Vector3(scaleInPercent, surfaceInPercent, volumeInPercent)
+	return relativeSizes
 
 func setCharacterSprite() -> void:
 	var randomInt : int = randi_range(0,2)
@@ -102,25 +96,46 @@ func setCharacterVoice() -> void:
 func setObject() -> void:
 	pass
 
-func setObjective() -> void :
+func createObjective() -> Dictionary :
+	var direction : String
+	var size : int  
+	var unit : String
+	
 	var randInt1 : int = randi_range(0,1)
 	match randInt1:
 		0:
-			objective = "smaller"
+			direction = "smaller"
 		1:
-			objective = "bigger"
+			direction = "bigger"
 	
-	var randInt2 : int = randi_range(1,10)
-	objectiveValue  = randInt2 * 5
+	var randInt2 : int = randi_range(1,20)
+	size = randInt2 * 5
 	
-	objectiveText.text = "make the object " + str(objectiveValue) + "% " + str(objective)
+	var randInt3 : int = randi_range(0,2)
+	match randInt3:
+		0:
+			unit = "scale"
+		1:
+			unit = "surface"
+		2:
+			unit = "volume"
+	
+	var objectiveDict : Dictionary = {
+		"direction" : direction,
+		"size" : size,
+		"unit" : unit,
+	}
+	
+	return objectiveDict
+
 	
 # @method used to play the inital animations, sounds and text reveals when a new customer enters the scene
-func playAnimation() -> void:
+func setupAndAnimateView() -> void:
 	animationPlayer.play("swoopIn")
 	audioPlayerSwoop.pitch_scale = randf_range(.5,1.5)
 	audioPlayerSwoop.play()
-	flavorText.text = textLines[objective][randi_range(0,2)]
+	flavorText.text = textLines[objective["direction"]][randi_range(0,2)]
+	objectiveText.text = "Make the objects " + objective["unit"] + " " + str(objective["size"]) + " % " + objective["direction"]
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "swoopIn":

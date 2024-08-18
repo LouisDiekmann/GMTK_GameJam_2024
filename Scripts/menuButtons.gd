@@ -3,6 +3,8 @@ extends VBoxContainer
 @export var menuNode : CanvasLayer
 @export var mainNode : Node3D
 @onready var paper: AudioStreamPlayer = $paper
+@onready var play: Button = $Play
+@onready var resume: Button = $Resume
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,9 +17,14 @@ func _process(delta: float) -> void:
 
 func _on_play_button_down() -> void:
 	paper.play()
+	play.visible = false
+	resume.visible = true
 	menuNode.openCurtains()
 	mainNode.startGame()
-
+	
+func _on_resume_button_down() -> void:
+	paper.play()
+	menuNode.openCurtains()
 
 func _on_credits_button_down() -> void:
 	paper.play()
