@@ -28,6 +28,10 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 mouse_cursor/custom_image="res://Assets/textures/cursorGauntlet1.png"
 
+[gui]
+
+theme/custom="res://Assets/mainTheme.tres"
+
 [input]
 
 enlarge={

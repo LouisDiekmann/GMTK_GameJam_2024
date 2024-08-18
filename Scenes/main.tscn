@@ -190,11 +190,27 @@ layout_mode = 2
 [node name="Label" type="Label" parent="menu/Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
-text = "\"SCP-x6x (Hopes)\" Kevin MacLeod (incompetech.com)
+text = "MUSIC:
+\"SCP-x6x (Hopes)\" Kevin MacLeod (incompetech.com)
 Licensed under Creative Commons: By Attribution 4.0 License
-http://creativecommons.org/licenses/by/4.0/"
+http://creativecommons.org/licenses/by/4.0/
+
+MESHES:
+thebasemesh.com"
 label_settings = SubResource("LabelSettings_mjumy")
 autowrap_mode = 3
+
+[node name="scoreLabel" type="Label" parent="menu"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 136.0
+offset_right = 20.0
+offset_bottom = 159.0
+grow_horizontal = 2
+text = "0"
+horizontal_alignment = 1
 
 [node name="CanvasLayer" parent="." node_paths=PackedStringArray("mainNode") instance=ExtResource("1_hbtbv")]
 mainNode = NodePath("..")

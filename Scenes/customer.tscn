@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dp607or8adtk3"]
+[gd_scene load_steps=16 format=3 uid="uid://dp607or8adtk3"]
 
 [ext_resource type="Script" path="res://Scripts/customer.gd" id="1_ojrj1"]
 [ext_resource type="AudioStream" uid="uid://c472we8hv382n" path="res://Assets/audio/effects/swoop.mp3" id="2_kmn64"]
@@ -75,6 +75,9 @@ _data = {
 
 [sub_resource type="BoxMesh" id="BoxMesh_ubf74"]
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6kkg0"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_qsjmi"]
 transparency = 1
 blend_mode = 1
@@ -137,11 +140,19 @@ uppercase = true
 [node name="object" type="Node3D" parent="."]
 transform = Transform3D(0.936213, 0.351433, 0, -0.324682, 0.864948, -0.382683, -0.134488, 0.358273, 0.92388, 1.89209, 0, 1)
 
-[node name="scaleable" type="MeshInstance3D" parent="object"]
-transform = Transform3D(1, 7.45058e-09, 2.98023e-08, -3.72529e-08, 1, -2.98023e-08, 7.45058e-09, -8.9407e-08, 1, 0, 0, 0)
-mesh = SubResource("BoxMesh_ubf74")
+[node name="scaleable" type="StaticBody3D" parent="object"]
+transform = Transform3D(1, 2.6077e-08, 0, -3.72529e-09, 1, 0, 7.45058e-09, -2.98023e-08, 1, 0, 0, 0)
 
-[node name="referance" type="MeshInstance3D" parent="object"]
+[node name="scaleableMesh" type="MeshInstance3D" parent="object/scaleable"]
+transform = Transform3D(1, -2.23517e-08, 2.98023e-08, -3.35276e-08, 1, -2.98023e-08, 7.45058e-09, -8.9407e-08, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_ubf74")
+skeleton = NodePath("../..")
+
+[node name="scaleableCollision" type="CollisionShape3D" parent="object/scaleable"]
+transform = Transform3D(1, -2.23517e-08, 2.98023e-08, -3.35276e-08, 1, -2.98023e-08, 7.45058e-09, -8.9407e-08, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_6kkg0")
+
+[node name="referanceMesh" type="MeshInstance3D" parent="object"]
 transform = Transform3D(1, 7.45058e-09, 2.98023e-08, -3.72529e-08, 1, -2.98023e-08, 7.45058e-09, -8.9407e-08, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_yarmq")
 
@@ -190,3 +201,5 @@ layout_mode = 2
 autowrap_mode = 3
 
 [connection signal="animation_finished" from="characterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="mouse_entered" from="object/scaleable" to="." method="_on_scaleable_mouse_entered"]
+[connection signal="mouse_exited" from="object/scaleable" to="." method="_on_scaleable_mouse_exited"]

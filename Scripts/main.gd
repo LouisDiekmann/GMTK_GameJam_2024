@@ -2,7 +2,10 @@ extends Node3D
 @onready var newCustomer : PackedScene = preload("res://Scenes/customer.tscn")
 @onready var autoRotateObject : bool = true
 @onready var ghostHidden : bool = false
+@onready var scoreLabel: Label = $menu/scoreLabel
+
 var score : int
+var currentCustomer : Customer
 
 const cursorGauntlet1 = preload("res://Assets/textures/cursorGauntlet1.png")
 const cursorGauntlet2 = preload("res://Assets/textures/cursorGauntlet2.png")
@@ -24,19 +27,49 @@ func startGame() -> void:
 	nextCustomer()
 
 func confirmSizePressed() -> void:
-	validateObjectSize()
+	score += validateObjectSize()
+	print(score)
+	scoreLabel.text = str(score)
 	removeCurrentCustomer()
 	nextCustomer()
 	
 func validateObjectSize() -> int:
-	score = 1
-	return score
+	var thisScore : int = 500
+	var relativeSizes : Vector3 = currentCustomer.getRelativeSizes()
+	var objective : Dictionary = currentCustomer.getObjective()
+
+	var objectiveSize : float = objective["size"]
+	var sizeDifference : Vector3 = abs(relativeSizes - Vector3(100,100,100))
+	print(sizeDifference)
+	print(objectiveSize)
+	match objective["unit"]:
+		"scale":
+			if abs(sizeDifference.x - objectiveSize) >= 10:
+				thisScore = 500 - abs(sizeDifference.x - objectiveSize)*15
+				if thisScore < 0 : thisScore = 0
+			else:
+				thisScore = 500
+		"surface":
+			if abs(sizeDifference.y - objectiveSize) >= 10:
+				thisScore = 500 - abs(sizeDifference.y - objectiveSize)*15
+				if thisScore < 0 : thisScore = 0
+			else:
+				thisScore = 500
+		"volume":
+			if abs(sizeDifference.z - objectiveSize) >= 10:
+				thisScore = 500 - abs(sizeDifference.z - objectiveSize)*15
+				if thisScore < 0 : thisScore = 0
+			else:
+				thisScore = 500
+
+	return thisScore
 	
 func removeCurrentCustomer() -> void:
-	pass
+	currentCustomer.queue_free()
 
 func nextCustomer() -> void:
-	add_child(newCustomer.instantiate())
+	currentCustomer = newCustomer.instantiate()
+	add_child(currentCustomer)
 	
 func stopRotationToggled(toggled : bool) -> void:
 	autoRotateObject = not toggled

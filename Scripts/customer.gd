@@ -3,14 +3,17 @@ class_name Customer
 
 var objective : Dictionary
 var relativeSizes : Vector3
+
+var scaleable : bool = false
+
 @onready var autoRotate : bool = true
 @export var characterSprite: Sprite3D
 
 @onready var parent : Node3D = get_parent()
 
 @onready var object: Node3D = $object
-@onready var scaleableObject: MeshInstance3D = $object/scaleable
-@onready var referanceObject: MeshInstance3D = $object/referance
+@onready var scaleableObject: StaticBody3D = $object/scaleable
+@onready var referanceObject: MeshInstance3D = $object/referanceMesh
 
 @onready var objectSizeVectorLength : float = object.scale.length()
 @onready var animationPlayer: AnimationPlayer = $characterSprite/AnimationPlayer
@@ -20,7 +23,6 @@ var relativeSizes : Vector3
 @onready var flavorText: Label = $Panel/MarginContainer/VBoxContainer/flavorText
 @onready var objectiveText: Label = $Panel/MarginContainer/VBoxContainer/objectiveText
 @onready var cheatLabel: Label = $Panel/MarginContainer/VBoxContainer/cheatLabel
-
 
 @onready var textLines : Dictionary = {
 	"smaller" : {
@@ -47,11 +49,19 @@ func _ready() -> void:
 	await get_tree().create_timer(.5).timeout
 	setupAndAnimateView()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	relativeSizes = calculateRelativeSizes()
 	cheatLabel.text = "Scale: " + str(snapped(relativeSizes.x, 0.01) ) + " Surface: " + str(snapped(relativeSizes.y, 0.01)) + " Volume: " + str(snapped(relativeSizes.z, 0.01))
 	
+	if scaleable:
+		scaleObject()
+		
+	if parent.call("getAutoRotateObject"):
+		object.rotation += Vector3(.002,.002,.002)
+		
+	referanceObject.visible = not parent.call("getGhostHidden")
+
+func scaleObject() -> void:
 	if Input.is_action_just_pressed("enlarge") or Input.is_action_just_pressed("shrink"):
 		audioClick.pitch_scale = randf_range(.8,1.2)
 		audioClick.play()
@@ -62,11 +72,6 @@ func _process(delta: float) -> void:
 		scaleableObject.scale += Vector3(.01,.01,.01)
 	if Input.is_action_pressed("shrink") and scaleableObject.scale.x > .2:
 		scaleableObject.scale -= Vector3(.01,.01,.01)
-		
-	if parent.call("getAutoRotateObject"):
-		object.rotation += Vector3(.002,.002,.002)
-		
-	referanceObject.visible = not parent.call("getGhostHidden")
 
 func calculateRelativeSizes() -> Vector3:
 	var scaledVec3 : Vector3 = scaleableObject.scale
@@ -108,17 +113,28 @@ func createObjective() -> Dictionary :
 		1:
 			direction = "bigger"
 	
-	var randInt2 : int = randi_range(1,20)
-	size = randInt2 * 5
-	
-	var randInt3 : int = randi_range(0,2)
-	match randInt3:
+	var randInt2 : int = randi_range(0,2)
+	match randInt2:
 		0:
 			unit = "scale"
 		1:
 			unit = "surface"
 		2:
 			unit = "volume"
+	
+	match direction:
+		"bigger":
+			var randInt3 : int = randi_range(1,20)
+			match unit:
+				"scale":
+					size = randInt3 * 5
+				"surface":
+					size = randInt3 * 10
+				"volume":
+					size = randInt3 * 20
+		"smaller":
+			var randInt4 : int = randi_range(1,16)
+			size = randInt4 * 5
 	
 	var objectiveDict : Dictionary = {
 		"direction" : direction,
@@ -128,8 +144,6 @@ func createObjective() -> Dictionary :
 	
 	return objectiveDict
 
-	
-# @method used to play the inital animations, sounds and text reveals when a new customer enters the scene
 func setupAndAnimateView() -> void:
 	animationPlayer.play("swoopIn")
 	audioPlayerSwoop.pitch_scale = randf_range(.5,1.5)
@@ -140,4 +154,16 @@ func setupAndAnimateView() -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "swoopIn":
 		animationPlayer.play("wobble")
+
+func getRelativeSizes() -> Vector3:
+	return relativeSizes
 	
+func getObjective() -> Dictionary:
+	return objective
+
+
+func _on_scaleable_mouse_entered() -> void:
+	scaleable = true
+
+func _on_scaleable_mouse_exited() -> void:
+	scaleable = false
