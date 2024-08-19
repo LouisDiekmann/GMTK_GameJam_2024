@@ -5,13 +5,10 @@ extends Node3D
 func _ready() -> void:
 	introTextAudio.play()
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-
 func _on_intro_text_audio_finished() -> void:
-	await get_tree().create_timer(2).timeout
-	get_parent().nextCustomer()
+	get_parent().nextCustomer(1)
 	queue_free()

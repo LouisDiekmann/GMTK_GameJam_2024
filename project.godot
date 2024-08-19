@@ -31,6 +31,7 @@ mouse_cursor/custom_image="res://Assets/textures/cursorGauntlet1.png"
 [gui]
 
 theme/custom="res://Assets/mainTheme.tres"
+theme/custom_font="res://Assets/fonts/IndieFlower-Regular.ttf"
 
 [input]
 

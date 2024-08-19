@@ -10,7 +10,7 @@ extends CanvasLayer
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("menu"):
 		pause()
-			
+
 func closeCurtains() -> void:
 	animationPlayer.play("closeCurtains")
 	audioCloseCurtain.pitch_scale = randf_range(0.7, 1.3)
@@ -33,18 +33,6 @@ func _on_pause_button_button_down() -> void:
 	pause()
 
 func pause() -> void:
-	if not curtainsClosed:
+	if not curtainsClosed and get_parent().currentCustomer is Customer:
 		closeCurtains()
-	else:
-		openCurtains()
-	changePauseIcon()
-	
-func changePauseIcon() -> void:
-	if not curtainsClosed:
-		$pauseButton.texture_normal = load("res://Assets/textures/GhostButton.png")
-		$pauseButton.texture_hover = load("res://Assets/textures/GhostButtonOff.png")
-		$pauseButton.texture_pressed = load("res://Assets/textures/GhostButtonOff.png")
-	else:
-		$pauseButton.texture_normal = load("res://Assets/textures/pauseButton.png")
-		$pauseButton.texture_hover = load("res://Assets/textures/pauseButtonHover.png")
-		$pauseButton.texture_pressed = load("res://Assets/textures/pauseButtonHover.png")
+		get_parent().currentCustomer.queue_free()

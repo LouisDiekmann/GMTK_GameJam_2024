@@ -5,7 +5,6 @@ extends VBoxContainer
 @onready var paper: AudioStreamPlayer = $paper
 @onready var paper2: AudioStreamPlayer = $paper2
 @onready var play: Button = $Play
-@onready var resume: Button = $Resume
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,15 +16,11 @@ func _process(delta: float) -> void:
 
 func _on_play_button_down() -> void:
 	paper.play()
-	play.visible = false
-	resume.visible = true
 	menuNode.openCurtains()
 	mainNode.startGame()
+	menuNode.settingsPanel.visible = false
+	menuNode.creditsPanel.visible = false
 	
-func _on_resume_button_down() -> void:
-	paper.play()
-	menuNode.openCurtains()
-	menuNode.changePauseIcon()
 
 func _on_credits_button_down() -> void:
 	paper.play()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dp607or8adtk3"]
+[gd_scene load_steps=28 format=3 uid="uid://dp607or8adtk3"]
 
 [ext_resource type="Script" path="res://Scripts/customer.gd" id="1_ojrj1"]
 [ext_resource type="AudioStream" uid="uid://c472we8hv382n" path="res://Assets/audio/effects/swoop.mp3" id="2_kmn64"]
@@ -13,6 +13,7 @@
 [ext_resource type="Material" uid="uid://dxgh51o88micr" path="res://Assets/ghostMeshMaterialtres.tres" id="8_tofbf"]
 [ext_resource type="Texture2D" uid="uid://deshs6xfqgvv8" path="res://Assets/textures/RotateButton.png" id="9_8vlim"]
 [ext_resource type="Texture2D" uid="uid://cdchu0o7lpo5o" path="res://Assets/textures/RotateButtonOff.png" id="10_aubic"]
+[ext_resource type="Texture2D" uid="uid://b1knp5c3wobjt" path="res://Assets/textures/PanelBig.png" id="10_m7o1u"]
 [ext_resource type="Texture2D" uid="uid://cp4pejnnsixrx" path="res://Assets/textures/confirmOff.png" id="12_bwi1d"]
 [ext_resource type="Texture2D" uid="uid://dudkk3ixux7ir" path="res://Assets/textures/confirm.png" id="13_q3if6"]
 [ext_resource type="Texture2D" uid="uid://bng23kpedoq2s" path="res://Assets/textures/Panel.png" id="14_8lrkp"]
@@ -43,6 +44,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(-10, 0, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-580, 789)]
+}
 
 [sub_resource type="Animation" id="Animation_ipkge"]
 resource_name = "swoopIn"
@@ -57,6 +70,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.353553, 1),
 "update": 0,
 "values": [Vector3(-10, 0, 1), Vector3(-2.7, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.353, 1),
+"update": 0,
+"values": [Vector2(-580, 789), Vector2(180, 789)]
 }
 
 [sub_resource type="Animation" id="Animation_awt8y"]
@@ -92,10 +117,16 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 [sub_resource type="BoxMesh" id="BoxMesh_yarmq"]
 material = ExtResource("8_tofbf")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_snimd"]
+texture = ExtResource("10_m7o1u")
+
 [sub_resource type="LabelSettings" id="LabelSettings_7re36"]
 line_spacing = 0.0
 font = ExtResource("5_fiqpe")
-font_size = 32
+font_size = 28
+font_color = Color(0, 0, 0, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nbkk5"]
 texture = ExtResource("14_8lrkp")
@@ -177,22 +208,23 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -798.0
+offset_left = -1540.0
 offset_top = 249.0
-offset_right = -230.0
+offset_right = -972.0
 offset_bottom = 465.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_snimd")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 23.0
-offset_top = 23.0
-offset_right = -23.0
-offset_bottom = -23.0
+offset_left = 37.0
+offset_top = 35.0
+offset_right = -37.0
+offset_bottom = -35.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -202,17 +234,15 @@ layout_mode = 2
 [node name="flavorText" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
+text = "test"
 label_settings = SubResource("LabelSettings_7re36")
 autowrap_mode = 3
 
 [node name="objectiveText" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
-autowrap_mode = 3
-
-[node name="cheatLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
 autowrap_mode = 3
 
 [node name="objectController" type="CanvasLayer" parent="."]
@@ -289,6 +319,14 @@ layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("12_bwi1d")
 texture_hover = ExtResource("13_q3if6")
+
+[node name="greeting" type="AudioStreamPlayer" parent="."]
+
+[node name="happy" type="AudioStreamPlayer" parent="."]
+
+[node name="whatever" type="AudioStreamPlayer" parent="."]
+
+[node name="disappointed" type="AudioStreamPlayer" parent="."]
 
 [connection signal="animation_finished" from="characterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="mouse_entered" from="object/scaleable" to="." method="_on_scaleable_mouse_entered"]

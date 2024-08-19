@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bm4bgpxv7fvot"]
+[gd_scene load_steps=28 format=3 uid="uid://bm4bgpxv7fvot"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_032sg"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="2_cdgvj"]
@@ -13,7 +13,11 @@
 [ext_resource type="Texture2D" uid="uid://dyi603mb1pwrj" path="res://Assets/textures/pauseButton.png" id="10_1nrp1"]
 [ext_resource type="Texture2D" uid="uid://dfm4en1e4h5wa" path="res://Assets/textures/background.png" id="10_5mpya"]
 [ext_resource type="Texture2D" uid="uid://wmk3vj3fyt3g" path="res://Assets/textures/pauseButtonHover.png" id="11_rksqh"]
+[ext_resource type="Texture2D" uid="uid://b1knp5c3wobjt" path="res://Assets/textures/PanelBig.png" id="12_3q0hc"]
 [ext_resource type="AudioStream" uid="uid://b0aqdq02yx8m4" path="res://Assets/audio/music/SCP-x6x.mp3" id="12_ypegv"]
+[ext_resource type="Texture2D" uid="uid://mlpvogdmt7pn" path="res://Assets/textures/CustomerIcon.png" id="13_qu02c"]
+[ext_resource type="Texture2D" uid="uid://c72twonmfeenl" path="res://Assets/textures/Coin.png" id="14_laji3"]
+[ext_resource type="Texture2D" uid="uid://dut74r7ckonjt" path="res://Assets/textures/Quest.png" id="15_3bsi2"]
 
 [sub_resource type="Animation" id="Animation_lwufo"]
 length = 0.001
@@ -105,8 +109,29 @@ _data = {
 "openCurtains": SubResource("Animation_ltd14")
 }
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g44w6"]
+texture = ExtResource("12_3q0hc")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
 [sub_resource type="LabelSettings" id="LabelSettings_mjumy"]
 font_size = 11
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mkd6r"]
+texture = ExtResource("12_3q0hc")
+texture_margin_left = 15.0
+texture_margin_top = 25.0
+texture_margin_right = 25.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1esub"]
+texture = ExtResource("12_3q0hc")
+texture_margin_left = 15.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 25.0
 
 [sub_resource type="Environment" id="Environment_mer0o"]
 
@@ -159,7 +184,6 @@ menuNode = NodePath("..")
 mainNode = NodePath("../..")
 
 [node name="Credits" type="Panel" parent="menu"]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -171,6 +195,7 @@ offset_right = 530.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_g44w6")
 
 [node name="MarginContainer" type="MarginContainer" parent="menu/Credits"]
 layout_mode = 1
@@ -203,18 +228,18 @@ label_settings = SubResource("LabelSettings_mjumy")
 autowrap_mode = 3
 
 [node name="Settings" type="Panel" parent="menu"]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 130.0
+offset_left = -532.0
 offset_top = -200.0
-offset_right = 530.0
+offset_right = -132.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_mkd6r")
 
 [node name="MarginContainer" type="MarginContainer" parent="menu/Settings"]
 layout_mode = 1
@@ -254,18 +279,6 @@ value = 100.0
 script = ExtResource("9_6y4yb")
 bus_name = "Music"
 
-[node name="scoreLabel" type="Label" parent="menu"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_top = 136.0
-offset_right = 20.0
-offset_bottom = 159.0
-grow_horizontal = 2
-text = "0"
-horizontal_alignment = 1
-
 [node name="pauseButton" type="TextureButton" parent="menu"]
 visible = false
 offset_left = 64.0
@@ -275,6 +288,83 @@ offset_bottom = 144.0
 texture_normal = ExtResource("10_1nrp1")
 texture_pressed = ExtResource("11_rksqh")
 texture_hover = ExtResource("11_rksqh")
+
+[node name="score" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="score"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_top = 72.0
+offset_right = 252.0
+offset_bottom = 188.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_1esub")
+
+[node name="MarginContainer" type="MarginContainer" parent="score/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -219.0
+offset_top = -34.0
+offset_right = 219.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="score/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="levelLabel" type="Label" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="MarginContainer" type="MarginContainer" parent="score/Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("13_qu02c")
+
+[node name="customerCount" type="Label" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "1/10"
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="score/Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("14_laji3")
+stretch_mode = 5
+
+[node name="currentScore" type="Label" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+vertical_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="score/Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("15_3bsi2")
+stretch_mode = 5
+
+[node name="goalScore" type="Label" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "55555"
+vertical_alignment = 1
 
 [node name="background" type="Sprite3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.1, 0)

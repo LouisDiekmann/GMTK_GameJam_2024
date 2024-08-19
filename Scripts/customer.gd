@@ -16,7 +16,6 @@ var scaleSpeed : int = 50
 @onready var ghostButton: TextureButton = $objectController/VBoxContainer/ghostButton
 @onready var rotateButton: TextureButton = $objectController/VBoxContainer/rotateButton
 
-
 @onready var object: Node3D = $object
 @onready var scaleableObject: StaticBody3D = $object/scaleable
 @onready var referanceObject: MeshInstance3D = $object/referanceMesh
@@ -28,7 +27,7 @@ var scaleSpeed : int = 50
 
 @onready var flavorText: Label = $Panel/MarginContainer/VBoxContainer/flavorText
 @onready var objectiveText: Label = $Panel/MarginContainer/VBoxContainer/objectiveText
-@onready var cheatLabel: Label = $Panel/MarginContainer/VBoxContainer/cheatLabel
+@onready var confirmButton: TextureButton = $objectController/VBoxContainer/confirmButton
 
 @onready var textLines : Dictionary = {
 	"smaller" : {
@@ -65,6 +64,7 @@ var prompt : Array
 @onready var randI : int = randi_range(0,1)
 
 func _ready() -> void:
+	confirmButton.disabled = true
 	setCharacterSprite()
 	setCharacterVoice()
 	setObject()
@@ -72,6 +72,8 @@ func _ready() -> void:
 	
 	await get_tree().create_timer(.5).timeout
 	setupAndAnimateView()
+	await get_tree().create_timer(2).timeout
+	confirmButton.disabled = false
 
 func _process(delta: float) -> void:
 	relativeSizes = calculateRelativeSizes()
@@ -79,11 +81,11 @@ func _process(delta: float) -> void:
 	$objectController/VBoxContainer/Panel/hintUnit.text = objective["otherUnits"][randI]
 	match objective["otherUnits"][randI]:
 		"scale":
-			$objectController/VBoxContainer/Panel/hintValue.text = str(snapped(relativeSizes.x, 0.01) )
+			$objectController/VBoxContainer/Panel/hintValue.text = str(round(relativeSizes.x) )
 		"surface":
-			$objectController/VBoxContainer/Panel/hintValue.text = str(snapped(relativeSizes.y, 0.01))
+			$objectController/VBoxContainer/Panel/hintValue.text = str(round(relativeSizes.y))
 		"volume":
-			$objectController/VBoxContainer/Panel/hintValue.text = str(snapped(relativeSizes.z, 0.01))
+			$objectController/VBoxContainer/Panel/hintValue.text = str(round(relativeSizes.z))
 	
 	if scaleable:
 		scaleObject()
@@ -126,9 +128,56 @@ func setCharacterSprite() -> void:
 			characterSprite.texture = preload("res://Assets/textures/characters/character2.png")
 		2:
 			characterSprite.texture = preload("res://Assets/textures/characters/character3.png")
-			
+
+@onready var greeting: AudioStreamPlayer = $greeting
+@onready var happy: AudioStreamPlayer = $happy
+@onready var whatever: AudioStreamPlayer = $whatever
+@onready var disappointed: AudioStreamPlayer = $disappointed
+
 func setCharacterVoice() -> void:
-	pass
+	var randInt : int = randi_range(0,4)
+	match randI:
+		0: 
+			greeting.stream = load("res://Assets/audio/effects/click.mp3")
+			happy.stream = load("res://Assets/audio/effects/click.mp3")
+			whatever.stream = load("res://Assets/audio/effects/click.mp3")
+			disappointed.stream = load("res://Assets/audio/effects/click.mp3")
+		1:
+			greeting.stream = load("res://Assets/audio/effects/click.mp3")
+			happy.stream = load("res://Assets/audio/effects/click.mp3")
+			whatever.stream = load("res://Assets/audio/effects/click.mp3")
+			disappointed.stream = load("res://Assets/audio/effects/click.mp3")
+		2:
+			greeting.stream = load("res://Assets/audio/effects/click.mp3")
+			happy.stream = load("res://Assets/audio/effects/click.mp3")
+			whatever.stream = load("res://Assets/audio/effects/click.mp3")
+			disappointed.stream = load("res://Assets/audio/effects/click.mp3")
+		3:
+			greeting.stream = load("res://Assets/audio/effects/click.mp3")
+			happy.stream = load("res://Assets/audio/effects/click.mp3")
+			whatever.stream = load("res://Assets/audio/effects/click.mp3")
+			disappointed.stream = load("res://Assets/audio/effects/click.mp3")
+		4:
+			greeting.stream = load("res://Assets/audio/effects/click.mp3")
+			happy.stream = load("res://Assets/audio/effects/click.mp3")
+			whatever.stream = load("res://Assets/audio/effects/click.mp3")
+			disappointed.stream = load("res://Assets/audio/effects/click.mp3")
+
+func playResponse(score : int) -> void:
+	if score > 350:
+		happy.play()
+	elif score > 150:
+		whatever.play()
+	else:
+		disappointed.play()
+		
+	animationPlayer.play_backwards("swoopIn")
+	audioPlayerSwoop.pitch_scale = randf_range(.5,1.5)
+	audioPlayerSwoop.play()
+	
+	await get_tree().create_timer(1).timeout
+	queue_free()
+			
 
 func setObject() -> void:
 	var randInt : int = randi_range(0,12)
@@ -240,3 +289,4 @@ func _on_scale_speed_drag_ended(value_changed: bool) -> void:
 
 func _on_confirm_button_button_down() -> void:
 	parent.confirmSizePressed()
+	$objectController/VBoxContainer/confirmButton.disabled = true
