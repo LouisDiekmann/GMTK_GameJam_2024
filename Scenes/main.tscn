@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bm4bgpxv7fvot"]
+[gd_scene load_steps=35 format=3 uid="uid://bm4bgpxv7fvot"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_032sg"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="2_cdgvj"]
@@ -11,14 +11,18 @@
 [ext_resource type="PackedScene" uid="uid://d10hrryhtj13j" path="res://Scenes/menuButtons.tscn" id="8_7d6uk"]
 [ext_resource type="Script" path="res://Scripts/gameVolume.gd" id="9_6y4yb"]
 [ext_resource type="FontFile" uid="uid://b3dmrm1q3euf4" path="res://Assets/fonts/NotoSans-Light.ttf" id="9_obl3x"]
-[ext_resource type="Texture2D" uid="uid://dyi603mb1pwrj" path="res://Assets/textures/pauseButton.png" id="10_1nrp1"]
 [ext_resource type="Texture2D" uid="uid://dfm4en1e4h5wa" path="res://Assets/textures/background.png" id="10_5mpya"]
-[ext_resource type="Texture2D" uid="uid://wmk3vj3fyt3g" path="res://Assets/textures/pauseButtonHover.png" id="11_rksqh"]
 [ext_resource type="Texture2D" uid="uid://b1knp5c3wobjt" path="res://Assets/textures/PanelBig.png" id="12_3q0hc"]
+[ext_resource type="Texture2D" uid="uid://s0i6qx10o3r4" path="res://Assets/textures/cursorGauntlet1.png" id="12_ws1er"]
 [ext_resource type="AudioStream" uid="uid://b0aqdq02yx8m4" path="res://Assets/audio/music/SCP-x6x.mp3" id="12_ypegv"]
+[ext_resource type="Texture2D" uid="uid://dudkk3ixux7ir" path="res://Assets/textures/confirm.png" id="13_fqe8u"]
 [ext_resource type="Texture2D" uid="uid://mlpvogdmt7pn" path="res://Assets/textures/CustomerIcon.png" id="13_qu02c"]
+[ext_resource type="Texture2D" uid="uid://deshs6xfqgvv8" path="res://Assets/textures/RotateButton.png" id="14_g2ypp"]
 [ext_resource type="Texture2D" uid="uid://c72twonmfeenl" path="res://Assets/textures/Coin.png" id="14_laji3"]
 [ext_resource type="Texture2D" uid="uid://dut74r7ckonjt" path="res://Assets/textures/Quest.png" id="15_3bsi2"]
+[ext_resource type="Texture2D" uid="uid://dmnf8njtmgfk5" path="res://Assets/textures/handleHowTo.png" id="15_dkxeb"]
+[ext_resource type="Texture2D" uid="uid://dlqcheqt2kc1t" path="res://Assets/textures/GhostButton.png" id="15_ux2qy"]
+[ext_resource type="Texture2D" uid="uid://byjpc1uchrx0f" path="res://Assets/textures/hint.png" id="16_hbdx1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_li74n"]
 font = ExtResource("9_obl3x")
@@ -52,10 +56,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 59.3451),
+"times": PackedFloat32Array(0, 60),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(482, 1102), Vector2(482, -1607)]
+"values": [Vector2(482, 1102), Vector2(482, -1678)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rj2vw"]
@@ -203,9 +207,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -478.0
-offset_top = 22.0
+offset_top = -2758.0
 offset_right = 478.0
-offset_bottom = 1651.0
+offset_bottom = -891.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "MUSIC:
@@ -222,10 +226,17 @@ thebasemesh.com
 
 
 
+GAME ENGINE:
+
+Godot
+v4.3.stable.official
+
+
+
 VOICES:
 
 Tomaster
-as the Townsfolk and Narrator#
+as the Townsfolk and Narrator
 
 
 
@@ -243,7 +254,7 @@ Louis Diekmann
 
 DEVELOPMENT:
 
-Louis Dekmann
+Louis Diekmann
 
 
 
@@ -289,6 +300,10 @@ stream = ExtResource("7_hbcox")
 bus = &"Effects"
 
 [node name="menuButtons" parent="menu" node_paths=PackedStringArray("menuNode", "mainNode") instance=ExtResource("8_7d6uk")]
+offset_left = -478.0
+offset_top = -340.0
+offset_right = 482.0
+offset_bottom = 220.0
 menuNode = NodePath("..")
 mainNode = NodePath("../..")
 
@@ -300,9 +315,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -532.0
-offset_top = -200.0
+offset_top = -28.0
 offset_right = -132.0
-offset_bottom = 200.0
+offset_bottom = 372.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_mkd6r")
@@ -368,15 +383,186 @@ script = ExtResource("9_6y4yb")
 bus_name = "Voices"
 val = 35
 
-[node name="pauseButton" type="TextureButton" parent="menu"]
+[node name="HowTo" type="Panel" parent="menu"]
 visible = false
-offset_left = 64.0
-offset_top = 64.0
-offset_right = 144.0
-offset_bottom = 144.0
-texture_normal = ExtResource("10_1nrp1")
-texture_pressed = ExtResource("11_rksqh")
-texture_hover = ExtResource("11_rksqh")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 115.0
+offset_top = -29.0
+offset_right = 449.0
+offset_bottom = 470.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_mkd6r")
+
+[node name="MarginContainer" type="MarginContainer" parent="menu/HowTo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = 37.0
+offset_right = -37.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/HowTo/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+texture = ExtResource("12_ws1er")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer7"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Hover over object, scale up with
+"
+vertical_alignment = 1
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer8"]
+layout_mode = 2
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer8"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "LMB, scale down with RMB
+"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("15_ux2qy")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Hide the ghost object"
+vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("14_g2ypp")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Stop object rotation"
+vertical_alignment = 1
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+texture = ExtResource("15_dkxeb")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer5"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Change scaling speed"
+vertical_alignment = 1
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+texture = ExtResource("16_hbdx1")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer6"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Hint for current objective"
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("13_fqe8u")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Confirm guess"
+vertical_alignment = 1
+
+[node name="HBoxContainer10" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer10"]
+layout_mode = 2
+texture = ExtResource("13_qu02c")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer10"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "amount of customers to serve"
+vertical_alignment = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+texture = ExtResource("14_laji3")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "your current score"
+vertical_alignment = 1
+
+[node name="HBoxContainer9" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer9"]
+layout_mode = 2
+texture = ExtResource("15_3bsi2")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer9"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "the score to reach"
+vertical_alignment = 1
 
 [node name="score" type="CanvasLayer" parent="."]
 
@@ -486,4 +672,3 @@ parameters/looping = true
 [connection signal="drag_ended" from="menu/Settings/MarginContainer/VBoxContainer/musicVolume" to="menu" method="_on_music_volume_drag_ended"]
 [connection signal="drag_ended" from="menu/Settings/MarginContainer/VBoxContainer/musicVolume2" to="menu" method="_on_music_volume_drag_ended"]
 [connection signal="drag_ended" from="menu/Settings/MarginContainer/VBoxContainer/musicVolume3" to="menu" method="_on_music_volume_drag_ended"]
-[connection signal="button_down" from="menu/pauseButton" to="menu" method="_on_pause_button_button_down"]
