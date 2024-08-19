@@ -43,8 +43,26 @@ var scaleSpeed : int = 50
 	}
 }
 
+@onready var meshes : Dictionary = {
+	"guitar" : "res://Assets/meshes/acoustic_guitar.obj",
+	"ashtray" : "res://Assets/meshes/ash_tray.obj",
+	"beaker" : "res://Assets/meshes/beaker.obj",
+	"bucket" : "res://Assets/meshes/bucket.obj",
+	"cannon" : "res://Assets/meshes/cannon_with_base.obj",
+	"bomb" : "res://Assets/meshes/cartoon_bomb.obj",
+	"shoe" : "res://Assets/meshes/chunky_loafer.obj",
+	"coffin" : "res://Assets/meshes/coffin_01.obj",
+	"pouch" : "res://Assets/meshes/compass_pouch.obj",
+	"crowbar" : "res://Assets/meshes/crowbar.obj",
+	"dagger" : "res://Assets/meshes/dagger_02.obj",
+	"egg" : "res://Assets/meshes/egg.obj",
+	"flute" : "res://Assets/meshes/pan_flute.obj"
+}
+
 var objects : Array[MeshInstance3D]
 var prompt : Array
+
+@onready var randI : int = randi_range(0,1)
 
 func _ready() -> void:
 	setCharacterSprite()
@@ -57,7 +75,15 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	relativeSizes = calculateRelativeSizes()
-	cheatLabel.text = "Scale: " + str(snapped(relativeSizes.x, 0.01) ) + " Surface: " + str(snapped(relativeSizes.y, 0.01)) + " Volume: " + str(snapped(relativeSizes.z, 0.01))
+	
+	$objectController/VBoxContainer/Panel/hintUnit.text = objective["otherUnits"][randI]
+	match objective["otherUnits"][randI]:
+		"scale":
+			$objectController/VBoxContainer/Panel/hintValue.text = str(snapped(relativeSizes.x, 0.01) )
+		"surface":
+			$objectController/VBoxContainer/Panel/hintValue.text = str(snapped(relativeSizes.y, 0.01))
+		"volume":
+			$objectController/VBoxContainer/Panel/hintValue.text = str(snapped(relativeSizes.z, 0.01))
 	
 	if scaleable:
 		scaleObject()
@@ -105,12 +131,35 @@ func setCharacterVoice() -> void:
 	pass
 
 func setObject() -> void:
+	var randInt : int = randi_range(0,12)
+	match randInt:
+		0: setMesh("beaker")
+		1: setMesh("guitar")
+		2: setMesh("bucket")
+		3: setMesh("ashtray")
+		4: setMesh("cannon")
+		5: setMesh("bomb")
+		6: setMesh("shoe")
+		7: setMesh("coffin")
+		8: setMesh("pouch")
+		9: setMesh("crowbar")
+		10: setMesh("dagger")
+		11: setMesh("egg")
+		12: setMesh("flute")
 	pass
 
+func setMesh(mesh : String) -> void:
+	$object/scaleable/scaleableMesh.mesh = load(meshes[mesh])
+	referanceObject.mesh = load(meshes[mesh])
+	for i in range(5):
+		$object/scaleable/scaleableMesh.set_surface_override_material(i, load("res://Assets/scaleableMeshMaterial.tres"))
+		referanceObject.set_surface_override_material(i, load("res://Assets/ghostMeshMaterialtres.tres"))
+	
 func createObjective() -> Dictionary :
 	var direction : String
 	var size : int  
 	var unit : String
+	var otherUnits : Array[String]
 	
 	var randInt1 : int = randi_range(0,1)
 	match randInt1:
@@ -123,10 +172,13 @@ func createObjective() -> Dictionary :
 	match randInt2:
 		0:
 			unit = "scale"
+			otherUnits = ["surface", "volume"]
 		1:
 			unit = "surface"
+			otherUnits = ["scale", "volume"]
 		2:
 			unit = "volume"
+			otherUnits = ["scale", "surface"]
 	
 	match direction:
 		"bigger":
@@ -146,6 +198,7 @@ func createObjective() -> Dictionary :
 		"direction" : direction,
 		"size" : size,
 		"unit" : unit,
+		"otherUnits" : otherUnits
 	}
 	
 	return objectiveDict

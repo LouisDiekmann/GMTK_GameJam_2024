@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://l5g08nm7e1oi"]
+
+[ext_resource type="Texture2D" uid="uid://dg5x3i4emi5ug" path="res://Assets/c1qq41jg.bmp" id="1_6hcxa"]
+[ext_resource type="Script" path="res://Scripts/intro.gd" id="1_62m5k"]
+[ext_resource type="AudioStream" uid="uid://dn43057162i48" path="res://Assets/audio/effects/curtain.mp3" id="3_gguuf"]
+
+[node name="introScene" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2)
+script = ExtResource("1_62m5k")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, -1.69157, 0, 0)
+render_priority = 1
+texture = ExtResource("1_6hcxa")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27753, 0, 0)
+text = "After many years of exciting adventures and dangerous endeavours, the small town of Sorrow's Creek had fallen silent.
+
+The townsfolk were no longer interested in fighting monsters or travelling to other lands. 
+
+And so it was that Pothos the Green was no longer wanted for his magical wizardry in battle, but rather for changing the size of their everyday objects.
+
+And such was the fate of Pothos the Green. Forever using his immense power to help the crooked old townsfolk of Sorrow's Creek with their belongings."
+font_size = 24
+horizontal_alignment = 0
+autowrap_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="introTextAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gguuf")
+
+[connection signal="finished" from="introTextAudio" to="." method="_on_intro_text_audio_finished"]

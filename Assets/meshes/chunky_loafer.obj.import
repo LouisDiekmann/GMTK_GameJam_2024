@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cax1ejqbn1nbw"
+path="res://.godot/imported/chunky_loafer.obj-af833a1d6d7b516e12ff75639f0d6ffa.mesh"
+
+[deps]
+
+files=["res://.godot/imported/chunky_loafer.obj-af833a1d6d7b516e12ff75639f0d6ffa.mesh"]
+
+source_file="res://Assets/meshes/chunky_loafer.obj"
+dest_files=["res://.godot/imported/chunky_loafer.obj-af833a1d6d7b516e12ff75639f0d6ffa.mesh", "res://.godot/imported/chunky_loafer.obj-af833a1d6d7b516e12ff75639f0d6ffa.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b4psv16vwei3i"
+path="res://.godot/imported/compass_pouch.obj-191c7d6eeb77d456077ee5c6860099d1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/compass_pouch.obj-191c7d6eeb77d456077ee5c6860099d1.mesh"]
+
+source_file="res://Assets/meshes/compass_pouch.obj"
+dest_files=["res://.godot/imported/compass_pouch.obj-191c7d6eeb77d456077ee5c6860099d1.mesh", "res://.godot/imported/compass_pouch.obj-191c7d6eeb77d456077ee5c6860099d1.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ds1sny62sdqsd"
+path="res://.godot/imported/dagger_02.obj-2419f7c404144e16be21a1c32d6ba5a0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/dagger_02.obj-2419f7c404144e16be21a1c32d6ba5a0.mesh"]
+
+source_file="res://Assets/meshes/dagger_02.obj"
+dest_files=["res://.godot/imported/dagger_02.obj-2419f7c404144e16be21a1c32d6ba5a0.mesh", "res://.godot/imported/dagger_02.obj-2419f7c404144e16be21a1c32d6ba5a0.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

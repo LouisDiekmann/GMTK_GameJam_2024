@@ -1,8 +1,11 @@
 extends Node3D
 @onready var newCustomer : PackedScene = preload("res://Scenes/customer.tscn")
+@onready var intro : PackedScene = preload("res://Scenes/intro.tscn")
 @onready var autoRotateObject : bool = true
 @onready var ghostHidden : bool = false
 @onready var scoreLabel: Label = $menu/scoreLabel
+@onready var firstStart : bool = true
+@onready var introPlayed : bool = false
 
 var score : int
 var currentCustomer : Customer
@@ -18,7 +21,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	
 func startGame() -> void:
-	nextCustomer()
+	if firstStart:
+		playIntro()
+	else:
+		nextCustomer()
+
+func playIntro() -> void:
+	add_child(intro.instantiate())
 
 func confirmSizePressed() -> void:
 	score += validateObjectSize()
@@ -60,7 +69,7 @@ func validateObjectSize() -> int:
 func calculateScore(value : float) -> int:
 	var calcScore: int
 	if value >= 10: 
-		calcScore = 500 - int(value) * 15
+		calcScore = 500 - int(value) * 5
 		if calcScore < 0: 
 			calcScore = 0
 	else:

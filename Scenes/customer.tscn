@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dp607or8adtk3"]
+[gd_scene load_steps=26 format=3 uid="uid://dp607or8adtk3"]
 
 [ext_resource type="Script" path="res://Scripts/customer.gd" id="1_ojrj1"]
 [ext_resource type="AudioStream" uid="uid://c472we8hv382n" path="res://Assets/audio/effects/swoop.mp3" id="2_kmn64"]
@@ -8,11 +8,14 @@
 [ext_resource type="FontFile" uid="uid://ct6smy7u6cp8i" path="res://Assets/fonts/IndieFlower-Regular.ttf" id="5_fiqpe"]
 [ext_resource type="FontFile" uid="uid://b3dmrm1q3euf4" path="res://Assets/fonts/NotoSans-Light.ttf" id="6_g0pwk"]
 [ext_resource type="Texture2D" uid="uid://dlqcheqt2kc1t" path="res://Assets/textures/GhostButton.png" id="7_4xf5i"]
+[ext_resource type="Material" uid="uid://wl7jdjs2ajt1" path="res://Assets/scaleableMeshMaterial.tres" id="8_8pvb6"]
 [ext_resource type="Texture2D" uid="uid://4fr8avab4odq" path="res://Assets/textures/GhostButtonOff.png" id="8_saek4"]
+[ext_resource type="Material" uid="uid://dxgh51o88micr" path="res://Assets/ghostMeshMaterialtres.tres" id="8_tofbf"]
 [ext_resource type="Texture2D" uid="uid://deshs6xfqgvv8" path="res://Assets/textures/RotateButton.png" id="9_8vlim"]
 [ext_resource type="Texture2D" uid="uid://cdchu0o7lpo5o" path="res://Assets/textures/RotateButtonOff.png" id="10_aubic"]
 [ext_resource type="Texture2D" uid="uid://cp4pejnnsixrx" path="res://Assets/textures/confirmOff.png" id="12_bwi1d"]
 [ext_resource type="Texture2D" uid="uid://dudkk3ixux7ir" path="res://Assets/textures/confirm.png" id="13_q3if6"]
+[ext_resource type="Texture2D" uid="uid://bng23kpedoq2s" path="res://Assets/textures/Panel.png" id="14_8lrkp"]
 
 [sub_resource type="Animation" id="Animation_nl73v"]
 length = 0.001
@@ -81,22 +84,22 @@ _data = {
 }
 
 [sub_resource type="BoxMesh" id="BoxMesh_ubf74"]
+material = ExtResource("8_8pvb6")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6kkg0"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_qsjmi"]
-transparency = 1
-blend_mode = 1
-no_depth_test = true
-
 [sub_resource type="BoxMesh" id="BoxMesh_yarmq"]
-material = SubResource("ORMMaterial3D_qsjmi")
+material = ExtResource("8_tofbf")
 
 [sub_resource type="LabelSettings" id="LabelSettings_7re36"]
 line_spacing = 0.0
 font = ExtResource("5_fiqpe")
 font_size = 32
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nbkk5"]
+texture = ExtResource("14_8lrkp")
+expand_margin_bottom = 80.0
 
 [node name="customer" type="Node3D" node_paths=PackedStringArray("characterSprite")]
 script = ExtResource("1_ojrj1")
@@ -149,13 +152,13 @@ horizontal_alignment = 0
 uppercase = true
 
 [node name="object" type="Node3D" parent="."]
-transform = Transform3D(0.936213, 0.351433, 0, -0.324682, 0.864948, -0.382683, -0.134488, 0.358273, 0.92388, 1.89209, 0, 1)
+transform = Transform3D(1.40432, 0.52715, 5.02034e-07, -0.487023, 1.29742, -0.574025, -0.201732, 0.537409, 1.38582, 1.30163, 0, 1)
 
 [node name="scaleable" type="StaticBody3D" parent="object"]
 transform = Transform3D(1, 2.6077e-08, 0, -3.72529e-09, 1, 0, 7.45058e-09, -2.98023e-08, 1, 0, 0, 0)
 
 [node name="scaleableMesh" type="MeshInstance3D" parent="object/scaleable"]
-transform = Transform3D(1, -2.23517e-08, 2.98023e-08, -3.35276e-08, 1, -2.98023e-08, 7.45058e-09, -8.9407e-08, 1, 0, 0, 0)
+transform = Transform3D(1, 4.09782e-08, 0, -3.72529e-08, 1, -2.98023e-08, 7.45058e-09, -1.49012e-07, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_ubf74")
 skeleton = NodePath("../..")
 
@@ -165,6 +168,7 @@ shape = SubResource("ConcavePolygonShape3D_6kkg0")
 
 [node name="referanceMesh" type="MeshInstance3D" parent="object"]
 transform = Transform3D(1, 7.45058e-09, 2.98023e-08, -3.72529e-08, 1, -2.98023e-08, 7.45058e-09, -8.9407e-08, 1, 0, 0, 0)
+visible = false
 mesh = SubResource("BoxMesh_yarmq")
 
 [node name="Panel" type="Panel" parent="."]
@@ -220,7 +224,7 @@ anchor_right = 1.0
 offset_left = -144.0
 offset_top = 64.0
 offset_right = -64.0
-offset_bottom = 368.0
+offset_bottom = 572.0
 grow_horizontal = 0
 
 [node name="ghostButton" type="TextureButton" parent="objectController/VBoxContainer"]
@@ -235,13 +239,49 @@ toggle_mode = true
 texture_normal = ExtResource("9_8vlim")
 texture_pressed = ExtResource("10_aubic")
 
+[node name="MarginContainer3" type="MarginContainer" parent="objectController/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
 [node name="scaleSpeed" type="HSlider" parent="objectController/VBoxContainer"]
 layout_mode = 2
 min_value = 10.0
 value = 50.0
 
 [node name="MarginContainer" type="MarginContainer" parent="objectController/VBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="objectController/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_nbkk5")
+
+[node name="hintUnit" type="Label" parent="objectController/VBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 49.0
+offset_bottom = 38.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_fiqpe")
+theme_override_font_sizes/font_size = 18
+text = "Size"
+
+[node name="hintValue" type="Label" parent="objectController/VBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 23.0
+offset_right = 66.0
+offset_bottom = 71.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_fiqpe")
+theme_override_font_sizes/font_size = 32
+text = "Size"
+
+[node name="MarginContainer2" type="MarginContainer" parent="objectController/VBoxContainer"]
+custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 
 [node name="confirmButton" type="TextureButton" parent="objectController/VBoxContainer"]
