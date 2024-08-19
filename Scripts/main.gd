@@ -97,7 +97,7 @@ func removeCurrentCustomer(score : int) -> void:
 func nextCustomer(value : int) -> void:
 	if customerCount < level[currentLevel].x:
 		if value == 0:
-			await get_tree().create_timer(1).timeout
+			await get_tree().create_timer(3).timeout
 		currentCustomer = newCustomer.instantiate()
 		add_child(currentCustomer)
 	else:

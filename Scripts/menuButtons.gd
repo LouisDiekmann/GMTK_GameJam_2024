@@ -19,12 +19,10 @@ func _on_play_button_down() -> void:
 	menuNode.openCurtains()
 	mainNode.startGame()
 	menuNode.settingsPanel.visible = false
-	menuNode.creditsPanel.visible = false
-	
 
 func _on_credits_button_down() -> void:
 	paper.play()
-	menuNode.creditsPanel.visible = not menuNode.creditsPanel.visible
+	menuNode.playCredits()
 
 func _on_settings_button_down() -> void:
 	paper.play()
