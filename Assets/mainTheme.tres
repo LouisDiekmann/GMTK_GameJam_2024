@@ -1,10 +1,19 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dg525obuef481"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dg525obuef481"]
 
 [ext_resource type="StyleBox" uid="uid://0kf1184fmink" path="res://Assets/buttonStyleBoxTheme.tres" id="1_4dg0c"]
 [ext_resource type="FontFile" uid="uid://ct6smy7u6cp8i" path="res://Assets/fonts/IndieFlower-Regular.ttf" id="1_gnvtl"]
+[ext_resource type="Texture2D" uid="uid://b5um8jhanvw25" path="res://Assets/textures/Handle.png" id="3_6lqua"]
+[ext_resource type="StyleBox" uid="uid://dx5bhtb58ucsk" path="res://new_style_box_flat.tres" id="4_nrmxx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu3p6"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [resource]
-Button/colors/font_color = Color(0.252805, 0.248784, 0.186538, 1)
+Button/colors/font_color = Color(0.304688, 0.285459, 0.252319, 1)
 Button/colors/font_disabled_color = Color(0, 0, 0, 0.5)
 Button/colors/font_focus_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
@@ -19,6 +28,12 @@ Button/styles/focus = ExtResource("1_4dg0c")
 Button/styles/hover = ExtResource("1_4dg0c")
 Button/styles/normal = ExtResource("1_4dg0c")
 Button/styles/pressed = ExtResource("1_4dg0c")
+HSlider/icons/grabber = ExtResource("3_6lqua")
+HSlider/icons/grabber_disabled = ExtResource("3_6lqua")
+HSlider/icons/grabber_highlight = ExtResource("3_6lqua")
+HSlider/icons/tick = null
+HSlider/styles/grabber_area = ExtResource("4_nrmxx")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_nu3p6")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 2
 Label/font_sizes/font_size = 24

@@ -136,7 +136,7 @@ func setCharacterSprite() -> void:
 
 func setCharacterVoice() -> void:
 	var randInt : int = randi_range(0,5)
-	match randI:
+	match randInt:
 		0: 
 			greeting.stream = load("res://Assets/audio/voices/request1.mp3")
 			happy.stream = load("res://Assets/audio/voices/happy1.mp3")

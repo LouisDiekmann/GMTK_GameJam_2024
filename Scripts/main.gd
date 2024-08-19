@@ -3,7 +3,7 @@ extends Node3D
 @onready var intro : PackedScene = preload("res://Scenes/intro.tscn")
 @onready var autoRotateObject : bool = true
 @onready var ghostHidden : bool = false
-@onready var introPlayed : bool = false
+@export var introPlayed : bool = false
 @onready var scoreLabel: Label = $score/Panel/MarginContainer/HBoxContainer/currentScore
 @onready var customerCountLabel: Label = $score/Panel/MarginContainer/HBoxContainer/customerCount
 @onready var goalScore: Label = $score/Panel/MarginContainer/HBoxContainer/goalScore
@@ -18,8 +18,8 @@ const cursorGauntlet2 = preload("res://Assets/textures/cursorGauntlet2.png")
 
 @onready var level : Dictionary = {
 	1: Vector2(5,1500),
-	2: Vector2(10,4000),
-	3: Vector2(15,6800)
+	2: Vector2(10,3500),
+	3: Vector2(15,6000)
 }
 @onready var currentLevel : int = 1
 
@@ -121,10 +121,13 @@ func nextLevel() ->  void:
 	else:
 		resetLevel()
 		$menu.closeCurtains()
+		
+	$score/Panel/MarginContainer/HBoxContainer/levelLabel.text = "Level " + str(currentLevel)
 
 func loseScreen() -> void:
 	print("you lose")
 	resetLevel()
+	currentLevel = 1
 	$menu.closeCurtains()
 
 func resetLevel() -> void:

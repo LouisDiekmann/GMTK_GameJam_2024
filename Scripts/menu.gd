@@ -35,7 +35,8 @@ func playCredits() -> void:
 	$menuButtons.visible = false 
 	$Credits/creditsAnimation.play("credits")
 	await get_tree().create_timer(50).timeout
-	$menuButtons.visible = true
+	if curtainsClosed:
+		$menuButtons.visible = true
 	creditsPlaying = false
 	
 func _on_music_volume_drag_ended(value_changed: bool) -> void:
