@@ -37,10 +37,12 @@ text = "Exit"
 [node name="paper" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_fbmba")
 volume_db = 3.692
+bus = &"Effects"
 
 [node name="paper2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_qk51b")
 pitch_scale = 1.47
+bus = &"Effects"
 
 [connection signal="button_down" from="Play" to="." method="_on_play_button_down"]
 [connection signal="mouse_entered" from="Play" to="." method="_on_mouse_entered"]

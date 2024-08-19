@@ -175,15 +175,18 @@ libraries = {
 
 [node name="curtainOpen" type="AudioStreamPlayer" parent="menu"]
 stream = ExtResource("6_wmtdr")
+bus = &"Effects"
 
 [node name="curtainClose" type="AudioStreamPlayer" parent="menu"]
 stream = ExtResource("7_hbcox")
+bus = &"Effects"
 
 [node name="menuButtons" parent="menu" node_paths=PackedStringArray("menuNode", "mainNode") instance=ExtResource("8_7d6uk")]
 menuNode = NodePath("..")
 mainNode = NodePath("../..")
 
 [node name="Credits" type="Panel" parent="menu"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -278,6 +281,29 @@ layout_mode = 2
 value = 100.0
 script = ExtResource("9_6y4yb")
 bus_name = "Music"
+val = 35
+
+[node name="musicVolumeLabel2" type="Label" parent="menu/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Effects Volume"
+
+[node name="musicVolume2" type="HSlider" parent="menu/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+value = 100.0
+script = ExtResource("9_6y4yb")
+bus_name = "Effects"
+val = 35
+
+[node name="musicVolumeLabel3" type="Label" parent="menu/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Voices Volume"
+
+[node name="musicVolume3" type="HSlider" parent="menu/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+value = 100.0
+script = ExtResource("9_6y4yb")
+bus_name = "Voices"
+val = 35
 
 [node name="pauseButton" type="TextureButton" parent="menu"]
 visible = false
@@ -390,8 +416,11 @@ omni_range = 12.936
 stream = ExtResource("12_ypegv")
 volume_db = -9.846
 autoplay = true
+bus = &"Music"
 parameters/looping = true
 
 [connection signal="drag_ended" from="menu/Settings/MarginContainer/VBoxContainer/gameVolume" to="menu" method="_on_game_volume_drag_ended"]
 [connection signal="drag_ended" from="menu/Settings/MarginContainer/VBoxContainer/musicVolume" to="menu" method="_on_music_volume_drag_ended"]
+[connection signal="drag_ended" from="menu/Settings/MarginContainer/VBoxContainer/musicVolume2" to="menu" method="_on_music_volume_drag_ended"]
+[connection signal="drag_ended" from="menu/Settings/MarginContainer/VBoxContainer/musicVolume3" to="menu" method="_on_music_volume_drag_ended"]
 [connection signal="button_down" from="menu/pauseButton" to="menu" method="_on_pause_button_button_down"]

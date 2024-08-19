@@ -139,16 +139,19 @@ characterSprite = NodePath("characterSprite")
 [node name="playerSwoop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_kmn64")
 pitch_scale = 0.48
+bus = &"Effects"
 
 [node name="click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_dvha7")
 volume_db = -3.692
+bus = &"Effects"
 playback_type = 1
 parameters/looping = true
 
 [node name="paper2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_fjprn")
 pitch_scale = 1.5
+bus = &"Effects"
 
 [node name="characterSprite" type="Sprite3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -10, 0, 1)
@@ -321,12 +324,20 @@ texture_normal = ExtResource("12_bwi1d")
 texture_hover = ExtResource("13_q3if6")
 
 [node name="greeting" type="AudioStreamPlayer" parent="."]
+volume_db = 15.0
+bus = &"Voices"
 
 [node name="happy" type="AudioStreamPlayer" parent="."]
+volume_db = 15.0
+bus = &"Voices"
 
 [node name="whatever" type="AudioStreamPlayer" parent="."]
+volume_db = 15.0
+bus = &"Voices"
 
 [node name="disappointed" type="AudioStreamPlayer" parent="."]
+volume_db = 15.0
+bus = &"Voices"
 
 [connection signal="animation_finished" from="characterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="mouse_entered" from="object/scaleable" to="." method="_on_scaleable_mouse_entered"]
@@ -338,3 +349,6 @@ texture_hover = ExtResource("13_q3if6")
 [connection signal="drag_ended" from="objectController/VBoxContainer/scaleSpeed" to="." method="_on_scale_speed_drag_ended"]
 [connection signal="button_down" from="objectController/VBoxContainer/confirmButton" to="." method="_on_confirm_button_button_down"]
 [connection signal="mouse_entered" from="objectController/VBoxContainer/confirmButton" to="." method="_on_button_mouse_entered"]
+[connection signal="finished" from="happy" to="." method="_on_respone_audio_finished"]
+[connection signal="finished" from="whatever" to="." method="_on_respone_audio_finished"]
+[connection signal="finished" from="disappointed" to="." method="_on_respone_audio_finished"]

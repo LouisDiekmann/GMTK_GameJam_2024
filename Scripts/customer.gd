@@ -135,50 +135,49 @@ func setCharacterSprite() -> void:
 @onready var disappointed: AudioStreamPlayer = $disappointed
 
 func setCharacterVoice() -> void:
-	var randInt : int = randi_range(0,4)
+	var randInt : int = randi_range(0,5)
 	match randI:
 		0: 
-			greeting.stream = load("res://Assets/audio/effects/click.mp3")
-			happy.stream = load("res://Assets/audio/effects/click.mp3")
-			whatever.stream = load("res://Assets/audio/effects/click.mp3")
-			disappointed.stream = load("res://Assets/audio/effects/click.mp3")
+			greeting.stream = load("res://Assets/audio/voices/request1.mp3")
+			happy.stream = load("res://Assets/audio/voices/happy1.mp3")
+			whatever.stream = load("res://Assets/audio/voices/whatever1.mp3")
+			disappointed.stream = load("res://Assets/audio/voices/disappointed1.mp3")
 		1:
-			greeting.stream = load("res://Assets/audio/effects/click.mp3")
-			happy.stream = load("res://Assets/audio/effects/click.mp3")
-			whatever.stream = load("res://Assets/audio/effects/click.mp3")
-			disappointed.stream = load("res://Assets/audio/effects/click.mp3")
+			greeting.stream = load("res://Assets/audio/voices/request2.mp3")
+			happy.stream = load("res://Assets/audio/voices/happy2.mp3")
+			whatever.stream = load("res://Assets/audio/voices/whatever2.mp3")
+			disappointed.stream = load("res://Assets/audio/voices/disappointed2.mp3")
 		2:
-			greeting.stream = load("res://Assets/audio/effects/click.mp3")
-			happy.stream = load("res://Assets/audio/effects/click.mp3")
-			whatever.stream = load("res://Assets/audio/effects/click.mp3")
-			disappointed.stream = load("res://Assets/audio/effects/click.mp3")
+			greeting.stream = load("res://Assets/audio/voices/request3.mp3")
+			happy.stream = load("res://Assets/audio/voices/happy3.mp3")
+			whatever.stream = load("res://Assets/audio/voices/whatever3.mp3")
+			disappointed.stream = load("res://Assets/audio/voices/disappointed3.mp3")
 		3:
-			greeting.stream = load("res://Assets/audio/effects/click.mp3")
-			happy.stream = load("res://Assets/audio/effects/click.mp3")
-			whatever.stream = load("res://Assets/audio/effects/click.mp3")
-			disappointed.stream = load("res://Assets/audio/effects/click.mp3")
+			greeting.stream = load("res://Assets/audio/voices/request4.mp3")
+			happy.stream = load("res://Assets/audio/voices/happy4.mp3")
+			whatever.stream = load("res://Assets/audio/voices/whatever4.mp3")
+			disappointed.stream = load("res://Assets/audio/voices/disappointed4.mp3")
 		4:
-			greeting.stream = load("res://Assets/audio/effects/click.mp3")
-			happy.stream = load("res://Assets/audio/effects/click.mp3")
-			whatever.stream = load("res://Assets/audio/effects/click.mp3")
-			disappointed.stream = load("res://Assets/audio/effects/click.mp3")
+			greeting.stream = load("res://Assets/audio/voices/request5.mp3")
+			happy.stream = load("res://Assets/audio/voices/happy5.mp3")
+			whatever.stream = load("res://Assets/audio/voices/whatever5.mp3")
+			disappointed.stream = load("res://Assets/audio/voices/disappointed5.mp3")
+		5:
+			greeting.stream = load("res://Assets/audio/voices/request6.mp3")
+			happy.stream = load("res://Assets/audio/voices/happy6.mp3")
+			whatever.stream = load("res://Assets/audio/voices/whatever6.mp3")
+			disappointed.stream = load("res://Assets/audio/voices/disappointed6.mp3")
 
 func playResponse(score : int) -> void:
+	var playing : bool = true
 	if score > 350:
 		happy.play()
 	elif score > 150:
 		whatever.play()
 	else:
 		disappointed.play()
-		
-	animationPlayer.play_backwards("swoopIn")
-	audioPlayerSwoop.pitch_scale = randf_range(.5,1.5)
-	audioPlayerSwoop.play()
 	
-	await get_tree().create_timer(1).timeout
-	queue_free()
 			
-
 func setObject() -> void:
 	var randInt : int = randi_range(0,12)
 	match randInt:
@@ -256,6 +255,7 @@ func setupAndAnimateView() -> void:
 	animationPlayer.play("swoopIn")
 	audioPlayerSwoop.pitch_scale = randf_range(.5,1.5)
 	audioPlayerSwoop.play()
+	greeting.play()
 	flavorText.text = textLines[objective["direction"]][randi_range(0,2)]
 	objectiveText.text = "Make the objects " + objective["unit"] + " " + str(objective["size"]) + " % " + objective["direction"]
 
@@ -290,3 +290,11 @@ func _on_scale_speed_drag_ended(value_changed: bool) -> void:
 func _on_confirm_button_button_down() -> void:
 	parent.confirmSizePressed()
 	$objectController/VBoxContainer/confirmButton.disabled = true
+
+func _on_respone_audio_finished() -> void:
+	animationPlayer.play_backwards("swoopIn")
+	audioPlayerSwoop.pitch_scale = randf_range(.5,1.5)
+	audioPlayerSwoop.play()
+	
+	await get_tree().create_timer(1).timeout
+	queue_free()
