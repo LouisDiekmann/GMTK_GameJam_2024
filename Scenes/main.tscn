@@ -20,13 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://c72twonmfeenl" path="res://Assets/textures/Coin.png" id="14_laji3"]
 [ext_resource type="Texture2D" uid="uid://dut74r7ckonjt" path="res://Assets/textures/Quest.png" id="15_3bsi2"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1esub"]
-texture = ExtResource("12_3q0hc")
-texture_margin_left = 15.0
-texture_margin_top = 20.0
-texture_margin_right = 20.0
-texture_margin_bottom = 25.0
-
 [sub_resource type="LabelSettings" id="LabelSettings_li74n"]
 font = ExtResource("9_obl3x")
 font_size = 22
@@ -168,88 +161,18 @@ texture_margin_top = 25.0
 texture_margin_right = 25.0
 texture_margin_bottom = 20.0
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1esub"]
+texture = ExtResource("12_3q0hc")
+texture_margin_left = 15.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 25.0
+
 [sub_resource type="Environment" id="Environment_mer0o"]
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_032sg")
 introPlayed = true
-
-[node name="score" type="CanvasLayer" parent="."]
-
-[node name="Panel" type="Panel" parent="score"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -256.0
-offset_top = 72.0
-offset_right = 252.0
-offset_bottom = 188.0
-grow_horizontal = 2
-size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxTexture_1esub")
-
-[node name="MarginContainer" type="MarginContainer" parent="score/Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -219.0
-offset_top = -34.0
-offset_right = 219.0
-offset_bottom = 35.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="score/Panel/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="levelLabel" type="Label" parent="score/Panel/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "Level 1"
-
-[node name="MarginContainer" type="MarginContainer" parent="score/Panel/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(16, 0)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="score/Panel/MarginContainer/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("13_qu02c")
-
-[node name="customerCount" type="Label" parent="score/Panel/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "1/10"
-vertical_alignment = 1
-
-[node name="MarginContainer2" type="MarginContainer" parent="score/Panel/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(32, 0)
-layout_mode = 2
-
-[node name="TextureRect2" type="TextureRect" parent="score/Panel/MarginContainer/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("14_laji3")
-stretch_mode = 5
-
-[node name="currentScore" type="Label" parent="score/Panel/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "0"
-vertical_alignment = 1
-
-[node name="MarginContainer3" type="MarginContainer" parent="score/Panel/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(32, 0)
-layout_mode = 2
-
-[node name="TextureRect3" type="TextureRect" parent="score/Panel/MarginContainer/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("15_3bsi2")
-stretch_mode = 5
-
-[node name="goalScore" type="Label" parent="score/Panel/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "55555"
-vertical_alignment = 1
 
 [node name="menu" type="CanvasLayer" parent="."]
 script = ExtResource("2_p76ab")
@@ -454,6 +377,83 @@ offset_bottom = 144.0
 texture_normal = ExtResource("10_1nrp1")
 texture_pressed = ExtResource("11_rksqh")
 texture_hover = ExtResource("11_rksqh")
+
+[node name="score" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="score"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_top = 72.0
+offset_right = 252.0
+offset_bottom = 188.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_1esub")
+
+[node name="MarginContainer" type="MarginContainer" parent="score/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -219.0
+offset_top = -34.0
+offset_right = 219.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="score/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="levelLabel" type="Label" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="MarginContainer" type="MarginContainer" parent="score/Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("13_qu02c")
+
+[node name="customerCount" type="Label" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "1/10"
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="score/Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("14_laji3")
+stretch_mode = 5
+
+[node name="currentScore" type="Label" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+vertical_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="score/Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("15_3bsi2")
+stretch_mode = 5
+
+[node name="goalScore" type="Label" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "55555"
+vertical_alignment = 1
 
 [node name="background" type="Sprite3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.1, 0)

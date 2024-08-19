@@ -176,28 +176,30 @@ func playResponse(score : int) -> void:
 		whatever.play()
 	else:
 		disappointed.play()
-	
-			
+
 func setObject() -> void:
 	var randInt : int = randi_range(0,12)
 	match randInt:
-		0: setMesh("beaker")
-		1: setMesh("guitar")
-		2: setMesh("bucket")
-		3: setMesh("ashtray")
-		4: setMesh("cannon")
-		5: setMesh("bomb")
-		6: setMesh("shoe")
-		7: setMesh("coffin")
-		8: setMesh("pouch")
-		9: setMesh("crowbar")
-		10: setMesh("dagger")
-		11: setMesh("egg")
-		12: setMesh("flute")
+		0: setMesh("beaker", 5)
+		1: setMesh("guitar", 2)
+		2: setMesh("bucket", 3)
+		3: setMesh("ashtray", 7)
+		4: setMesh("cannon", 1)
+		5: setMesh("bomb", 3)
+		6: setMesh("shoe", 5)
+		7: setMesh("coffin", 1)
+		8: setMesh("pouch", 5)
+		9: setMesh("crowbar", 5)
+		10: setMesh("dagger", 7)
+		11: setMesh("egg", 10)
+		12: setMesh("flute", 3)
 	pass
 
-func setMesh(mesh : String) -> void:
-	$object/scaleable/scaleableMesh.mesh = load(meshes[mesh])
+func setMesh(mesh : String, scaler : int) -> void:
+	object.scale = Vector3(scaler, scaler, scaler)
+	var scaleableMesh: Mesh = load(meshes[mesh])
+	$object/scaleable/scaleableMesh.mesh = scaleableMesh
+	$object/scaleable/scaleableCollision.shape = scaleableMesh.create_trimesh_shape()
 	referanceObject.mesh = load(meshes[mesh])
 	for i in range(5):
 		$object/scaleable/scaleableMesh.set_surface_override_material(i, load("res://Assets/scaleableMeshMaterial.tres"))
