@@ -28,8 +28,8 @@ func _on_settings_button_down() -> void:
 	paper.play()
 	menuNode.settingsPanel.visible = not menuNode.settingsPanel.visible
 
-func _on_exit_button_down() -> void:
-	get_tree().quit()
+#func _on_exit_button_down() -> void:
+	#get_tree().quit()
 
 func _on_mouse_entered() -> void:
 	paper2.play()
