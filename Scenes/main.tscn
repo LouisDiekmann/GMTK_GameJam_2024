@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bm4bgpxv7fvot"]
+[gd_scene load_steps=33 format=3 uid="uid://bm4bgpxv7fvot"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_032sg"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="2_cdgvj"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://wmk3vj3fyt3g" path="res://Assets/textures/pauseButtonHover.png" id="11_rksqh"]
 [ext_resource type="Texture2D" uid="uid://b1knp5c3wobjt" path="res://Assets/textures/PanelBig.png" id="12_3q0hc"]
 [ext_resource type="AudioStream" uid="uid://b0aqdq02yx8m4" path="res://Assets/audio/music/SCP-x6x.mp3" id="12_ypegv"]
+[ext_resource type="PackedScene" path="res://Scenes/how_to.tscn" id="13_kmlj3"]
 [ext_resource type="Texture2D" uid="uid://mlpvogdmt7pn" path="res://Assets/textures/CustomerIcon.png" id="13_qu02c"]
 [ext_resource type="Texture2D" uid="uid://c72twonmfeenl" path="res://Assets/textures/Coin.png" id="14_laji3"]
 [ext_resource type="Texture2D" uid="uid://dut74r7ckonjt" path="res://Assets/textures/Quest.png" id="15_3bsi2"]
@@ -388,6 +389,9 @@ value = 100.0
 script = ExtResource("9_6y4yb")
 bus_name = "Voices"
 val = 35
+
+[node name="howTo" parent="menu" instance=ExtResource("13_kmlj3")]
+visible = false
 
 [node name="pauseButton" type="TextureButton" parent="menu"]
 visible = false

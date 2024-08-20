@@ -1,0 +1,199 @@
+[gd_scene load_steps=12 format=3 uid="uid://ckqftoyqd48th"]
+
+[ext_resource type="Texture2D" uid="uid://b1knp5c3wobjt" path="res://Assets/textures/PanelBig.png" id="1_ryhj3"]
+[ext_resource type="Texture2D" uid="uid://s0i6qx10o3r4" path="res://Assets/textures/cursorGauntlet1.png" id="2_4komw"]
+[ext_resource type="Texture2D" uid="uid://dlqcheqt2kc1t" path="res://Assets/textures/GhostButton.png" id="3_ve3nb"]
+[ext_resource type="Texture2D" uid="uid://deshs6xfqgvv8" path="res://Assets/textures/RotateButton.png" id="4_lxwph"]
+[ext_resource type="Texture2D" uid="uid://dmnf8njtmgfk5" path="res://Assets/textures/handleHowTo.png" id="5_yte7n"]
+[ext_resource type="Texture2D" uid="uid://byjpc1uchrx0f" path="res://Assets/textures/hint.png" id="6_j6m5n"]
+[ext_resource type="Texture2D" uid="uid://dudkk3ixux7ir" path="res://Assets/textures/confirm.png" id="7_mor8o"]
+[ext_resource type="Texture2D" uid="uid://mlpvogdmt7pn" path="res://Assets/textures/CustomerIcon.png" id="8_pc0c6"]
+[ext_resource type="Texture2D" uid="uid://c72twonmfeenl" path="res://Assets/textures/Coin.png" id="9_ywphe"]
+[ext_resource type="Texture2D" uid="uid://dut74r7ckonjt" path="res://Assets/textures/Quest.png" id="10_c6efw"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mkd6r"]
+texture = ExtResource("1_ryhj3")
+texture_margin_left = 15.0
+texture_margin_top = 25.0
+texture_margin_right = 25.0
+texture_margin_bottom = 20.0
+
+[node name="HowTo" type="Panel"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 115.0
+offset_top = -29.0
+offset_right = 449.0
+offset_bottom = 470.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_mkd6r")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = 37.0
+offset_right = -37.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+texture = ExtResource("2_4komw")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer7"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Hover over object, scale up with
+"
+vertical_alignment = 1
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer8"]
+layout_mode = 2
+expand_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer8"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "LMB, scale down with RMB
+"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_ve3nb")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Hide the ghost object"
+vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("4_lxwph")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Stop object rotation"
+vertical_alignment = 1
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+texture = ExtResource("5_yte7n")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer5"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Change scaling speed"
+vertical_alignment = 1
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+texture = ExtResource("6_j6m5n")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer6"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Hint for current objective"
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("7_mor8o")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Confirm guess"
+vertical_alignment = 1
+
+[node name="HBoxContainer10" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer10"]
+layout_mode = 2
+texture = ExtResource("8_pc0c6")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer10"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "amount of customers to serve"
+vertical_alignment = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+texture = ExtResource("9_ywphe")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "your current score"
+vertical_alignment = 1
+
+[node name="HBoxContainer9" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer9"]
+layout_mode = 2
+texture = ExtResource("10_c6efw")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer9"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "the score to reach"
+vertical_alignment = 1

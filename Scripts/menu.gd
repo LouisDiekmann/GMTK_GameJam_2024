@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var audioOpenCurtain: AudioStreamPlayer = $curtainOpen
 @onready var audioCloseCurtain: AudioStreamPlayer = $curtainClose
 @onready var settingsPanel: Panel = $Settings
+@onready var howToPanel: Panel = $howTo
 @onready var menuButtons: VBoxContainer = $menuButtons
 
 @onready var creditsPlaying : bool = false

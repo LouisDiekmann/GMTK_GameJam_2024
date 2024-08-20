@@ -276,6 +276,7 @@ func _on_scaleable_mouse_entered() -> void:
 
 func _on_scaleable_mouse_exited() -> void:
 	scaleable = false
+	audioClick.stop()
 
 func _on_ghost_button_toggled(toggled_on: bool) -> void:
 	ghost = not toggled_on

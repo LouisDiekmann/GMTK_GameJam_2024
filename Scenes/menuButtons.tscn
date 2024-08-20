@@ -30,6 +30,10 @@ text = "Settings"
 layout_mode = 2
 text = "Credits"
 
+[node name="HowTo" type="Button" parent="."]
+layout_mode = 2
+text = "How to Play"
+
 [node name="Exit" type="Button" parent="."]
 visible = false
 layout_mode = 2
@@ -51,5 +55,7 @@ bus = &"Effects"
 [connection signal="mouse_entered" from="Settings" to="." method="_on_mouse_entered"]
 [connection signal="button_down" from="Credits" to="." method="_on_credits_button_down"]
 [connection signal="mouse_entered" from="Credits" to="." method="_on_mouse_entered"]
+[connection signal="button_down" from="HowTo" to="." method="_on_how_to_button_down"]
+[connection signal="mouse_entered" from="HowTo" to="." method="_on_mouse_entered"]
 [connection signal="button_down" from="Exit" to="." method="_on_exit_button_down"]
 [connection signal="mouse_entered" from="Exit" to="." method="_on_mouse_entered"]
