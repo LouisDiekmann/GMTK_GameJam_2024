@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bb6c1oop4w4p8"
+path="res://.godot/imported/ash_tray.obj-8858ab96db63b5a14e2211b3218a5d43.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ash_tray.obj-8858ab96db63b5a14e2211b3218a5d43.mesh"]
+
+source_file="res://Assets/meshes/ash_tray.obj"
+dest_files=["res://.godot/imported/ash_tray.obj-8858ab96db63b5a14e2211b3218a5d43.mesh", "res://.godot/imported/ash_tray.obj-8858ab96db63b5a14e2211b3218a5d43.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

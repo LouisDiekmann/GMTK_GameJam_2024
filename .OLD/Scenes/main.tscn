@@ -1,0 +1,674 @@
+[gd_scene load_steps=35 format=3 uid="uid://bm4bgpxv7fvot"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_032sg"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="2_cdgvj"]
+[ext_resource type="Script" path="res://Scripts/menu.gd" id="2_p76ab"]
+[ext_resource type="Texture2D" uid="uid://bgyauupmj5uo7" path="res://Assets/textures/curtainLeft.png" id="3_qfwvv"]
+[ext_resource type="Texture2D" uid="uid://bska0rx27lpul" path="res://Assets/textures/curtainRight.png" id="4_ojr1x"]
+[ext_resource type="Texture2D" uid="uid://s074jktwig77" path="res://Assets/textures/curtain2.png" id="5_f8s0e"]
+[ext_resource type="AudioStream" uid="uid://dn43057162i48" path="res://Assets/audio/effects/curtain.mp3" id="6_wmtdr"]
+[ext_resource type="AudioStream" uid="uid://deptrquw54yhf" path="res://Assets/audio/effects/curtainClose.mp3" id="7_hbcox"]
+[ext_resource type="PackedScene" uid="uid://d10hrryhtj13j" path="res://Scenes/menuButtons.tscn" id="8_7d6uk"]
+[ext_resource type="Script" path="res://Scripts/gameVolume.gd" id="9_6y4yb"]
+[ext_resource type="FontFile" uid="uid://b3dmrm1q3euf4" path="res://Assets/fonts/NotoSans-Light.ttf" id="9_obl3x"]
+[ext_resource type="Texture2D" uid="uid://dfm4en1e4h5wa" path="res://Assets/textures/background.png" id="10_5mpya"]
+[ext_resource type="Texture2D" uid="uid://b1knp5c3wobjt" path="res://Assets/textures/PanelBig.png" id="12_3q0hc"]
+[ext_resource type="Texture2D" uid="uid://s0i6qx10o3r4" path="res://Assets/textures/cursorGauntlet1.png" id="12_ws1er"]
+[ext_resource type="AudioStream" uid="uid://b0aqdq02yx8m4" path="res://Assets/audio/music/SCP-x6x.mp3" id="12_ypegv"]
+[ext_resource type="Texture2D" uid="uid://dudkk3ixux7ir" path="res://Assets/textures/confirm.png" id="13_fqe8u"]
+[ext_resource type="Texture2D" uid="uid://mlpvogdmt7pn" path="res://Assets/textures/CustomerIcon.png" id="13_qu02c"]
+[ext_resource type="Texture2D" uid="uid://deshs6xfqgvv8" path="res://Assets/textures/RotateButton.png" id="14_g2ypp"]
+[ext_resource type="Texture2D" uid="uid://c72twonmfeenl" path="res://Assets/textures/Coin.png" id="14_laji3"]
+[ext_resource type="Texture2D" uid="uid://dut74r7ckonjt" path="res://Assets/textures/Quest.png" id="15_3bsi2"]
+[ext_resource type="Texture2D" uid="uid://dmnf8njtmgfk5" path="res://Assets/textures/handleHowTo.png" id="15_dkxeb"]
+[ext_resource type="Texture2D" uid="uid://dlqcheqt2kc1t" path="res://Assets/textures/GhostButton.png" id="15_ux2qy"]
+[ext_resource type="Texture2D" uid="uid://byjpc1uchrx0f" path="res://Assets/textures/hint.png" id="16_hbdx1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_li74n"]
+font = ExtResource("9_obl3x")
+font_size = 22
+font_color = Color(0.714445, 0.669056, 0.646484, 1)
+outline_size = 4
+outline_color = Color(0.713726, 0.670588, 0.647059, 1)
+
+[sub_resource type="Animation" id="Animation_v8h2y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(482, 1102)]
+}
+
+[sub_resource type="Animation" id="Animation_uv3sq"]
+resource_name = "credits"
+length = 60.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(482, 1102), Vector2(482, -1678)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rj2vw"]
+_data = {
+"RESET": SubResource("Animation_v8h2y"),
+"credits": SubResource("Animation_uv3sq")
+}
+
+[sub_resource type="Animation" id="Animation_lwufo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("curtainLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("curtainRight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gjw1p"]
+resource_name = "closeCurtains"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("curtainLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(5.09824, 1),
+"update": 0,
+"values": [Vector2(-960, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("curtainRight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(5.09824, 1),
+"update": 0,
+"values": [Vector2(960, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ltd14"]
+resource_name = "openCurtains"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("curtainLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.499183),
+"transitions": PackedFloat32Array(2.73208, 2.92817),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-960, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("curtainRight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.499183),
+"transitions": PackedFloat32Array(2.73208, 2.92817),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(960, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_58ojm"]
+_data = {
+"RESET": SubResource("Animation_lwufo"),
+"closeCurtains": SubResource("Animation_gjw1p"),
+"openCurtains": SubResource("Animation_ltd14")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mkd6r"]
+texture = ExtResource("12_3q0hc")
+texture_margin_left = 15.0
+texture_margin_top = 25.0
+texture_margin_right = 25.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1esub"]
+texture = ExtResource("12_3q0hc")
+texture_margin_left = 15.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 25.0
+
+[sub_resource type="Environment" id="Environment_mer0o"]
+
+[node name="main" type="Node3D"]
+script = ExtResource("1_032sg")
+introPlayed = true
+
+[node name="menu" type="CanvasLayer" parent="."]
+script = ExtResource("2_p76ab")
+
+[node name="curtainLeft" type="TextureRect" parent="menu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_qfwvv")
+expand_mode = 1
+
+[node name="curtainRight" type="TextureRect" parent="menu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_ojr1x")
+expand_mode = 1
+
+[node name="Credits" type="Label" parent="menu"]
+custom_minimum_size = Vector2(1, 0)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -478.0
+offset_top = 22.0
+offset_right = 478.0
+offset_bottom = 1889.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "MUSIC:
+
+\"SCP-x6x (Hopes)\" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+
+
+MESHES:
+
+thebasemesh.com
+
+
+
+GAME ENGINE:
+
+Godot
+v4.3.stable.official
+
+
+
+VOICES:
+
+Tomaster
+as the Townsfolk and Narrator
+
+
+
+SOUNDDESIGN:
+
+Louis Diekmann
+
+
+
+GAMEART:
+
+Louis Diekmann
+
+
+
+DEVELOPMENT:
+
+Louis Diekmann
+
+
+
+SPECIAL THANKS:
+
+Tom, Oli for getting me into game development
+
+Tomaster for being a great friend and helping me out with this project
+
+Tim for being my brother
+
+
+"
+label_settings = SubResource("LabelSettings_li74n")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="creditsAnimation" type="AnimationPlayer" parent="menu/Credits"]
+libraries = {
+"": SubResource("AnimationLibrary_rj2vw")
+}
+
+[node name="curtainSide" type="TextureRect" parent="menu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_f8s0e")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="menu"]
+libraries = {
+"": SubResource("AnimationLibrary_58ojm")
+}
+
+[node name="curtainOpen" type="AudioStreamPlayer" parent="menu"]
+stream = ExtResource("6_wmtdr")
+bus = &"Effects"
+
+[node name="curtainClose" type="AudioStreamPlayer" parent="menu"]
+stream = ExtResource("7_hbcox")
+bus = &"Effects"
+
+[node name="menuButtons" parent="menu" node_paths=PackedStringArray("menuNode", "mainNode") instance=ExtResource("8_7d6uk")]
+offset_left = -478.0
+offset_top = -340.0
+offset_right = 482.0
+offset_bottom = 220.0
+menuNode = NodePath("..")
+mainNode = NodePath("../..")
+
+[node name="Settings" type="Panel" parent="menu"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -532.0
+offset_top = -28.0
+offset_right = -132.0
+offset_bottom = 372.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_mkd6r")
+
+[node name="MarginContainer" type="MarginContainer" parent="menu/Settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.0
+offset_top = -179.0
+offset_right = 179.0
+offset_bottom = 179.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/Settings/MarginContainer"]
+layout_mode = 2
+
+[node name="gameVolumeLabel" type="Label" parent="menu/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Volume"
+
+[node name="gameVolume" type="HSlider" parent="menu/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+value = 100.0
+script = ExtResource("9_6y4yb")
+bus_name = "Master"
+val = 35
+
+[node name="musicVolumeLabel" type="Label" parent="menu/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="musicVolume" type="HSlider" parent="menu/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+value = 100.0
+script = ExtResource("9_6y4yb")
+bus_name = "Music"
+val = 35
+
+[node name="musicVolumeLabel2" type="Label" parent="menu/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Effects Volume"
+
+[node name="musicVolume2" type="HSlider" parent="menu/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+value = 100.0
+script = ExtResource("9_6y4yb")
+bus_name = "Effects"
+val = 35
+
+[node name="musicVolumeLabel3" type="Label" parent="menu/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Voices Volume"
+
+[node name="musicVolume3" type="HSlider" parent="menu/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+value = 100.0
+script = ExtResource("9_6y4yb")
+bus_name = "Voices"
+val = 35
+
+[node name="HowTo" type="Panel" parent="menu"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 115.0
+offset_top = -29.0
+offset_right = 449.0
+offset_bottom = 470.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_mkd6r")
+
+[node name="MarginContainer" type="MarginContainer" parent="menu/HowTo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = 37.0
+offset_right = -37.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/HowTo/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+texture = ExtResource("12_ws1er")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer7"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Hover over object, scale up with
+"
+vertical_alignment = 1
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer8"]
+layout_mode = 2
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer8"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "LMB, scale down with RMB
+"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("15_ux2qy")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Hide the ghost object"
+vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("14_g2ypp")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Stop object rotation"
+vertical_alignment = 1
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+texture = ExtResource("15_dkxeb")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer5"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Change scaling speed"
+vertical_alignment = 1
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+texture = ExtResource("16_hbdx1")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer6"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Hint for current objective"
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("13_fqe8u")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Confirm guess"
+vertical_alignment = 1
+
+[node name="HBoxContainer10" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer10"]
+layout_mode = 2
+texture = ExtResource("13_qu02c")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer10"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "amount of customers to serve"
+vertical_alignment = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+texture = ExtResource("14_laji3")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "your current score"
+vertical_alignment = 1
+
+[node name="HBoxContainer9" type="HBoxContainer" parent="menu/HowTo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer9"]
+layout_mode = 2
+texture = ExtResource("15_3bsi2")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="menu/HowTo/MarginContainer/VBoxContainer/HBoxContainer9"]
+custom_minimum_size = Vector2(0, 38.775)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "the score to reach"
+vertical_alignment = 1
+
+[node name="score" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="score"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_top = 72.0
+offset_right = 252.0
+offset_bottom = 188.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_1esub")
+
+[node name="MarginContainer" type="MarginContainer" parent="score/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -219.0
+offset_top = -34.0
+offset_right = 219.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="score/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="levelLabel" type="Label" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="MarginContainer" type="MarginContainer" parent="score/Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("13_qu02c")
+
+[node name="customerCount" type="Label" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "1/10"
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="score/Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("14_laji3")
+stretch_mode = 5
+
+[node name="currentScore" type="Label" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+vertical_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="score/Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("15_3bsi2")
+stretch_mode = 5
+
+[node name="goalScore" type="Label" parent="score/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "55555"
+vertical_alignment = 1
+
+[node name="background" type="Sprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.1, 0)
+texture = ExtResource("10_5mpya")
+
+[node name="player" type="Node3D" parent="."]
+
+[node name="head" type="Node3D" parent="player"]
+script = ExtResource("2_cdgvj")
+AMPLITUDE = 0.1
+
+[node name="Camera3D" type="Camera3D" parent="player/head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.60446)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mer0o")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 3)
+omni_range = 12.936
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_ypegv")
+volume_db = -9.846
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[connection signal="drag_ended" from="menu/Settings/MarginContainer/VBoxContainer/gameVolume" to="menu" method="_on_game_volume_drag_ended"]
+[connection signal="drag_ended" from="menu/Settings/MarginContainer/VBoxContainer/musicVolume" to="menu" method="_on_music_volume_drag_ended"]
+[connection signal="drag_ended" from="menu/Settings/MarginContainer/VBoxContainer/musicVolume2" to="menu" method="_on_music_volume_drag_ended"]
+[connection signal="drag_ended" from="menu/Settings/MarginContainer/VBoxContainer/musicVolume3" to="menu" method="_on_music_volume_drag_ended"]

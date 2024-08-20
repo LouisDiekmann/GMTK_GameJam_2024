@@ -33,22 +33,12 @@ var scaleSpeed : int = 50
 	"smaller" : {
 		0 : "This is way to big for what I want to use it for!",
 		1 : "This dang thing needs to fit inside of me pocket",
-		2 : "Where the hell am I supposed to store this giant piece of garbage?",
-		3 : "I can't carry this giant thing all day, mate",
-		4 : "I need to be able to swallow this. Don't ask why.",
-		5 : "Getting this inside would be impossible.",
-		6 : "Can you make this smaller for me?",
-		7 : "Bloody hell this is gigantic"
+		2 : "Where de hell am I supposed to store this giant piece of garbage?"
 	},
 	"bigger" : {
 		0 : "I need this thing to fit more Beer!",
 		1 : "I brought me donkey to bring this home! Better make it worth the effort, ey?",
 		2 : "Don't worry about it mate. I just need to fit in this somehow.",
-		3 : "Let's just say, there is more room available than I thought.",
-		4 : "Some might say this is too big. But I need it even bigger.",
-		5 : "I should've never believed that old runt. this is too small.",
-		6 : "I didn't even know they make 'em that small.",
-		7 : "Old Gran won't fit in there I tell 'ye."
 	}
 }
 
@@ -268,7 +258,7 @@ func setupAndAnimateView() -> void:
 	audioPlayerSwoop.pitch_scale = randf_range(.5,1.5)
 	audioPlayerSwoop.play()
 	greeting.play()
-	flavorText.text = textLines[objective["direction"]][randi_range(0,7)]
+	flavorText.text = textLines[objective["direction"]][randi_range(0,2)]
 	objectiveText.text = "Make the objects " + objective["unit"] + " " + str(objective["size"]) + " % " + objective["direction"]
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -283,10 +273,9 @@ func getObjective() -> Dictionary:
 
 func _on_scaleable_mouse_entered() -> void:
 	scaleable = true
-	
+
 func _on_scaleable_mouse_exited() -> void:
 	scaleable = false
-	audioClick.stop()
 
 func _on_ghost_button_toggled(toggled_on: bool) -> void:
 	ghost = not toggled_on

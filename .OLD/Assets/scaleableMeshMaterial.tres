@@ -1,0 +1,27 @@
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://wl7jdjs2ajt1"]
+
+[sub_resource type="Gradient" id="Gradient_ewisk"]
+colors = PackedColorArray(0.509944, 0.33679, 0.209393, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bryqy"]
+noise_type = 3
+frequency = 0.0063
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ug0ci"]
+seamless = true
+color_ramp = SubResource("Gradient_ewisk")
+noise = SubResource("FastNoiseLite_bryqy")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uwvp4"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pygof"]
+noise = SubResource("FastNoiseLite_uwvp4")
+
+[resource]
+albedo_color = Color(0.483248, 0.380248, 0.256071, 1)
+albedo_texture = SubResource("NoiseTexture2D_ug0ci")
+metallic_specular = 0.57
+roughness = 0.8
+normal_texture = SubResource("NoiseTexture2D_pygof")
+refraction_enabled = true
+uv1_triplanar = true

@@ -4,8 +4,6 @@ extends CanvasLayer
 @onready var audioOpenCurtain: AudioStreamPlayer = $curtainOpen
 @onready var audioCloseCurtain: AudioStreamPlayer = $curtainClose
 @onready var settingsPanel: Panel = $Settings
-@onready var howToPanel: Panel = $HowTo
-
 @onready var menuButtons: VBoxContainer = $menuButtons
 
 @onready var creditsPlaying : bool = false
@@ -24,6 +22,7 @@ func closeCurtains() -> void:
 	await get_tree().create_timer(.3).timeout
 	audioCloseCurtain.play()
 	menuButtons.visible = true
+	$TextureRect.visible = true
 	
 func openCurtains() -> void:
 	curtainsClosed = not curtainsClosed
@@ -31,6 +30,7 @@ func openCurtains() -> void:
 	audioOpenCurtain.pitch_scale = randf_range(0.7, 1.3)
 	audioOpenCurtain.play()
 	menuButtons.visible = false
+	$TextureRect.visible = false
 	
 func playCredits() -> void:
 	creditsPlaying = true

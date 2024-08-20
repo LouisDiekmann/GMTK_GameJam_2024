@@ -1,0 +1,8 @@
+[gd_resource type="ORMMaterial3D" format=3 uid="uid://dxgh51o88micr"]
+
+[resource]
+render_priority = 1
+transparency = 1
+blend_mode = 1
+no_depth_test = true
+albedo_color = Color(0.464844, 0.464844, 0.464844, 1)

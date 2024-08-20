@@ -1,0 +1,354 @@
+[gd_scene load_steps=28 format=3 uid="uid://dp607or8adtk3"]
+
+[ext_resource type="Script" path="res://Scripts/customer.gd" id="1_ojrj1"]
+[ext_resource type="AudioStream" uid="uid://c472we8hv382n" path="res://Assets/audio/effects/swoop.mp3" id="2_kmn64"]
+[ext_resource type="Texture2D" uid="uid://btmm25on3qua0" path="res://Assets/textures/characters/character1.png" id="2_mvi4w"]
+[ext_resource type="AudioStream" uid="uid://dewsvcpqunhee" path="res://Assets/audio/effects/click.mp3" id="3_dvha7"]
+[ext_resource type="AudioStream" uid="uid://jvwop66g71j1" path="res://Assets/audio/effects/paper3.mp3" id="4_fjprn"]
+[ext_resource type="FontFile" uid="uid://ct6smy7u6cp8i" path="res://Assets/fonts/IndieFlower-Regular.ttf" id="5_fiqpe"]
+[ext_resource type="FontFile" uid="uid://b3dmrm1q3euf4" path="res://Assets/fonts/NotoSans-Light.ttf" id="6_g0pwk"]
+[ext_resource type="Texture2D" uid="uid://dlqcheqt2kc1t" path="res://Assets/textures/GhostButton.png" id="7_4xf5i"]
+[ext_resource type="Material" uid="uid://wl7jdjs2ajt1" path="res://Assets/scaleableMeshMaterial.tres" id="8_8pvb6"]
+[ext_resource type="Texture2D" uid="uid://4fr8avab4odq" path="res://Assets/textures/GhostButtonOff.png" id="8_saek4"]
+[ext_resource type="Material" uid="uid://dxgh51o88micr" path="res://Assets/ghostMeshMaterialtres.tres" id="8_tofbf"]
+[ext_resource type="Texture2D" uid="uid://deshs6xfqgvv8" path="res://Assets/textures/RotateButton.png" id="9_8vlim"]
+[ext_resource type="Texture2D" uid="uid://cdchu0o7lpo5o" path="res://Assets/textures/RotateButtonOff.png" id="10_aubic"]
+[ext_resource type="Texture2D" uid="uid://b1knp5c3wobjt" path="res://Assets/textures/PanelBig.png" id="10_m7o1u"]
+[ext_resource type="Texture2D" uid="uid://cp4pejnnsixrx" path="res://Assets/textures/confirmOff.png" id="12_bwi1d"]
+[ext_resource type="Texture2D" uid="uid://dudkk3ixux7ir" path="res://Assets/textures/confirm.png" id="13_q3if6"]
+[ext_resource type="Texture2D" uid="uid://bng23kpedoq2s" path="res://Assets/textures/Panel.png" id="14_8lrkp"]
+
+[sub_resource type="Animation" id="Animation_nl73v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("characterSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("characterSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-10, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-580, 789)]
+}
+
+[sub_resource type="Animation" id="Animation_ipkge"]
+resource_name = "swoopIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("characterSprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.353553, 1),
+"update": 0,
+"values": [Vector3(-10, 0, 1), Vector3(-2.7, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.353, 1),
+"update": 0,
+"values": [Vector2(-580, 789), Vector2(180, 789)]
+}
+
+[sub_resource type="Animation" id="Animation_awt8y"]
+resource_name = "wobble"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("characterSprite:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.0872665), Vector3(0, 0, 0), Vector3(0, 0, 0.0872665)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_83ksp"]
+_data = {
+"RESET": SubResource("Animation_nl73v"),
+"swoopIn": SubResource("Animation_ipkge"),
+"wobble": SubResource("Animation_awt8y")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_ubf74"]
+material = ExtResource("8_8pvb6")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6kkg0"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yarmq"]
+material = ExtResource("8_tofbf")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_snimd"]
+texture = ExtResource("10_m7o1u")
+
+[sub_resource type="LabelSettings" id="LabelSettings_7re36"]
+line_spacing = 0.0
+font = ExtResource("5_fiqpe")
+font_size = 28
+font_color = Color(0, 0, 0, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nbkk5"]
+texture = ExtResource("14_8lrkp")
+expand_margin_bottom = 80.0
+
+[node name="customer" type="Node3D" node_paths=PackedStringArray("characterSprite")]
+script = ExtResource("1_ojrj1")
+characterSprite = NodePath("characterSprite")
+
+[node name="playerSwoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_kmn64")
+pitch_scale = 0.48
+bus = &"Effects"
+
+[node name="click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_dvha7")
+volume_db = -3.692
+bus = &"Effects"
+playback_type = 1
+parameters/looping = true
+
+[node name="paper2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_fjprn")
+pitch_scale = 1.5
+bus = &"Effects"
+
+[node name="characterSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -10, 0, 1)
+render_priority = 1
+texture = ExtResource("2_mvi4w")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="characterSprite"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_83ksp")
+}
+autoplay = "wobble"
+
+[node name="flavorText" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 1.36848, 1.10045)
+font = ExtResource("5_fiqpe")
+font_size = 48
+horizontal_alignment = 0
+
+[node name="objectiveText" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 1.10641, 1.10045)
+font = ExtResource("6_g0pwk")
+font_size = 24
+horizontal_alignment = 0
+uppercase = true
+
+[node name="cheatLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0.98162, 1.10045)
+font = ExtResource("6_g0pwk")
+font_size = 24
+horizontal_alignment = 0
+uppercase = true
+
+[node name="object" type="Node3D" parent="."]
+transform = Transform3D(1.40432, 0.52715, 5.02034e-07, -0.487023, 1.29742, -0.574025, -0.201732, 0.537409, 1.38582, 1.30163, 0, 1)
+
+[node name="scaleable" type="StaticBody3D" parent="object"]
+transform = Transform3D(1, 2.6077e-08, 0, -3.72529e-09, 1, 0, 7.45058e-09, -2.98023e-08, 1, 0, 0, 0)
+
+[node name="scaleableMesh" type="MeshInstance3D" parent="object/scaleable"]
+transform = Transform3D(1, 4.09782e-08, 0, -3.72529e-08, 1, -2.98023e-08, 7.45058e-09, -1.49012e-07, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_ubf74")
+skeleton = NodePath("../..")
+
+[node name="scaleableCollision" type="CollisionShape3D" parent="object/scaleable"]
+transform = Transform3D(1, -2.23517e-08, 2.98023e-08, -3.35276e-08, 1, -2.98023e-08, 7.45058e-09, -8.9407e-08, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_6kkg0")
+
+[node name="referanceMesh" type="MeshInstance3D" parent="object"]
+transform = Transform3D(1, 7.45058e-09, 2.98023e-08, -3.72529e-08, 1, -2.98023e-08, 7.45058e-09, -8.9407e-08, 1, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_yarmq")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1540.0
+offset_top = 249.0
+offset_right = -972.0
+offset_bottom = 465.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_snimd")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = 35.0
+offset_right = -37.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="flavorText" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+text = "test"
+label_settings = SubResource("LabelSettings_7re36")
+autowrap_mode = 3
+
+[node name="objectiveText" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+autowrap_mode = 3
+
+[node name="objectController" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="objectController"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -108.0
+offset_top = 37.0
+offset_right = -28.0
+offset_bottom = 545.0
+grow_horizontal = 0
+
+[node name="ghostButton" type="TextureButton" parent="objectController/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("7_4xf5i")
+texture_pressed = ExtResource("8_saek4")
+
+[node name="rotateButton" type="TextureButton" parent="objectController/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("9_8vlim")
+texture_pressed = ExtResource("10_aubic")
+
+[node name="MarginContainer3" type="MarginContainer" parent="objectController/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="scaleSpeed" type="HSlider" parent="objectController/VBoxContainer"]
+layout_mode = 2
+min_value = 10.0
+value = 50.0
+
+[node name="MarginContainer" type="MarginContainer" parent="objectController/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="objectController/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_nbkk5")
+
+[node name="hintUnit" type="Label" parent="objectController/VBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 51.0
+offset_bottom = 41.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_fiqpe")
+theme_override_font_sizes/font_size = 18
+text = "Size"
+
+[node name="hintValue" type="Label" parent="objectController/VBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 23.0
+offset_right = 68.0
+offset_bottom = 71.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_fiqpe")
+theme_override_font_sizes/font_size = 32
+text = "Size"
+
+[node name="MarginContainer2" type="MarginContainer" parent="objectController/VBoxContainer"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+
+[node name="confirmButton" type="TextureButton" parent="objectController/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("12_bwi1d")
+texture_hover = ExtResource("13_q3if6")
+
+[node name="greeting" type="AudioStreamPlayer" parent="."]
+volume_db = 15.0
+bus = &"Voices"
+
+[node name="happy" type="AudioStreamPlayer" parent="."]
+volume_db = 15.0
+bus = &"Voices"
+
+[node name="whatever" type="AudioStreamPlayer" parent="."]
+volume_db = 15.0
+bus = &"Voices"
+
+[node name="disappointed" type="AudioStreamPlayer" parent="."]
+volume_db = 15.0
+bus = &"Voices"
+
+[connection signal="animation_finished" from="characterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="mouse_entered" from="object/scaleable" to="." method="_on_scaleable_mouse_entered"]
+[connection signal="mouse_exited" from="object/scaleable" to="." method="_on_scaleable_mouse_exited"]
+[connection signal="mouse_entered" from="objectController/VBoxContainer/ghostButton" to="." method="_on_button_mouse_entered"]
+[connection signal="toggled" from="objectController/VBoxContainer/ghostButton" to="." method="_on_ghost_button_toggled"]
+[connection signal="mouse_entered" from="objectController/VBoxContainer/rotateButton" to="." method="_on_button_mouse_entered"]
+[connection signal="toggled" from="objectController/VBoxContainer/rotateButton" to="." method="_on_rotate_button_toggled"]
+[connection signal="drag_ended" from="objectController/VBoxContainer/scaleSpeed" to="." method="_on_scale_speed_drag_ended"]
+[connection signal="button_down" from="objectController/VBoxContainer/confirmButton" to="." method="_on_confirm_button_button_down"]
+[connection signal="mouse_entered" from="objectController/VBoxContainer/confirmButton" to="." method="_on_button_mouse_entered"]
+[connection signal="finished" from="happy" to="." method="_on_respone_audio_finished"]
+[connection signal="finished" from="whatever" to="." method="_on_respone_audio_finished"]
+[connection signal="finished" from="disappointed" to="." method="_on_respone_audio_finished"]

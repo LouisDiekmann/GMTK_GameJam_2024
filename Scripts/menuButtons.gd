@@ -18,7 +18,6 @@ func _on_play_button_down() -> void:
 	paper.play()
 	menuNode.openCurtains()
 	mainNode.startGame()
-	menuNode.howToPanel.visible = false
 	menuNode.settingsPanel.visible = false
 
 func _on_credits_button_down() -> void:
@@ -34,7 +33,3 @@ func _on_exit_button_down() -> void:
 
 func _on_mouse_entered() -> void:
 	paper2.play()
-
-func _on_how_to_play_button_down() -> void:
-	paper.play()
-	menuNode.howToPanel.visible = not menuNode.howToPanel.visible

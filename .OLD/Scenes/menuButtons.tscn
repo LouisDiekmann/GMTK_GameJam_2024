@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=3 uid="uid://d10hrryhtj13j"]
+
+[ext_resource type="Script" path="res://Scripts/menuButtons.gd" id="1_h2g2n"]
+[ext_resource type="AudioStream" uid="uid://bn6bn5wy26t50" path="res://Assets/audio/effects/paper2.mp3" id="2_fbmba"]
+[ext_resource type="Texture2D" uid="uid://c75a4l8w8vgpf" path="res://Assets/banner.png" id="2_illna"]
+[ext_resource type="AudioStream" uid="uid://jvwop66g71j1" path="res://Assets/audio/effects/paper3.mp3" id="3_qk51b"]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.0
+offset_top = -55.0
+offset_right = 33.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_h2g2n")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_illna")
+
+[node name="Play" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Play"
+
+[node name="Settings" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Settings"
+
+[node name="How to Play" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "How to Play"
+
+[node name="Credits" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Credits"
+
+[node name="Exit" type="Button" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Exit"
+
+[node name="paper" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_fbmba")
+volume_db = 3.692
+bus = &"Effects"
+
+[node name="paper2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qk51b")
+pitch_scale = 1.47
+bus = &"Effects"
+
+[connection signal="button_down" from="Play" to="." method="_on_play_button_down"]
+[connection signal="mouse_entered" from="Play" to="." method="_on_mouse_entered"]
+[connection signal="button_down" from="Settings" to="." method="_on_settings_button_down"]
+[connection signal="mouse_entered" from="Settings" to="." method="_on_mouse_entered"]
+[connection signal="button_down" from="How to Play" to="." method="_on_how_to_play_button_down"]
+[connection signal="mouse_entered" from="How to Play" to="." method="_on_mouse_entered"]
+[connection signal="button_down" from="Credits" to="." method="_on_credits_button_down"]
+[connection signal="mouse_entered" from="Credits" to="." method="_on_mouse_entered"]
+[connection signal="button_down" from="Exit" to="." method="_on_exit_button_down"]
+[connection signal="mouse_entered" from="Exit" to="." method="_on_mouse_entered"]
